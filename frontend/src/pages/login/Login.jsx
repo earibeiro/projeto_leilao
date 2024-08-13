@@ -12,13 +12,10 @@ const Login = () => {
         <div class="main">
             <Card class="card" title="Login" subTitle="Insira suas informações de acesso" footer={""} header={""} className="md:w-28rem">
                 <label htmlFor="username">Usuário </label>
-                <InputText id="username" aria-describedby="username-help" />
-                <small id="username-help">
-                    <br/>Enter your username to reset your password.<br/>
-                </small>
+                <InputText id="username" aria-describedby="username-help" class="username" required/>
                 <label htmlFor="password">Senha </label>
-                <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />
-                <Button class="submit" label="Submit" />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask class="password" required/>
+                <Button class="submit" label="Acessar" />
             </Card>
 
             
