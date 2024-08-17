@@ -15,7 +15,8 @@ const Login = () => {
                 <InputText inputStyle={{ width: '100%' }} className="w-full mb-3" aria-describedby="username-help" required/>
                 <label htmlFor="password">Senha </label>
                 <Password inputStyle={{ width: '100%' }} className="w-full mb-3" value={value} onChange={(e) => setValue(e.target.value)} toggleMask required/>
-                <a href="/forgot-password" className="block text-center text-sm mb-4">Esqueceu a senha?</a>
+                <a href="/recoverpass" className="block text-center text-sm mb-4">Esqueceu a senha?</a>
+                Não tem uma conta?<a href="/signup" className="block text-center text-sm mb-4">Cadastre-se</a>
                 <Button label="Acessar" />
             </Card>
 
