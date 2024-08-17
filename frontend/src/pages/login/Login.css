@@ -1,4 +1,4 @@
-.main{
+body{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,8 +12,8 @@ label{
 }
 
 .card{
-    width: 30%;
-    height: 35%;
+    width: 50%;
+    height: 60%;
     margin: 0 auto;
     padding: 20px;
     border-radius: 10px;
@@ -21,17 +21,17 @@ label{
     text-align: center;
 }
 
-.submit{
-    display: block;
-    width: 60%;
-    margin: 1em auto;
-    height: 2em;
-    font-size: 1.1rem;
-    background-color: #46b7d0;
-    border-color: white;
-    min-width: 300px;
-}
-
 .password .username{
     width: 100%;
 }
+
+.p-icon-field {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .card {
+      width: 100%;
+    }
+    
+  }

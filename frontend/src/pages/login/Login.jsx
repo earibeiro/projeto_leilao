@@ -9,18 +9,17 @@ const Login = () => {
     const [value, setValue] = useState('');
 
     return (
-        <div class="main">
-            <Card class="card" title="Login" subTitle="Insira suas informações de acesso" footer={""} header={""} className="md:w-28rem">
+        <div>
+            <Card title="Login" subTitle="Insira suas informações de acesso" footer={""} header={""} className="md:w-30rem card">
                 <label htmlFor="username">Usuário </label>
-                <InputText id="username" aria-describedby="username-help" class="username" required/>
+                <InputText inputStyle={{ width: '100%' }} className="w-full mb-3" aria-describedby="username-help" required/>
                 <label htmlFor="password">Senha </label>
-                <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask class="password" required/>
-                <Button class="submit" label="Acessar" />
+                <Password inputStyle={{ width: '100%' }} className="w-full mb-3" value={value} onChange={(e) => setValue(e.target.value)} toggleMask required/>
+                <a href="/forgot-password" className="block text-center text-sm mb-4">Esqueceu a senha?</a>
+                <Button label="Acessar" />
             </Card>
 
             
-                
-
         </div>
     );
 }
