@@ -14,7 +14,8 @@ const Login = () => {
             <Helmet>
                 <title>Login</title>
             </Helmet>
-            <Card title="Login" subTitle="Insira suas informações de acesso" footer={""} header={""} className="md:w-30rem card">
+            <Card title="Login" subTitle="Insira suas informações de acesso" footer={""} header={""} className="md:w-24rem p-0 card">
+                <img src="/img/sitelogo.png" alt="Logo" className="logo" />
                 <label htmlFor="username">Usuário </label>
                 <InputText inputStyle={{ width: '100%' }} className="w-full mb-3" aria-describedby="username-help" required/>
                 <label htmlFor="password">Senha </label>

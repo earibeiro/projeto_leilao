@@ -4,6 +4,7 @@ import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from 'primereact/floatlabel';
 import { Helmet } from 'react-helmet';
+import { Button } from 'primereact/button';
 
 const Signup = () => {
     const[value, setValue] = useState('');
@@ -26,6 +27,8 @@ const Signup = () => {
                         <label for="nome">E-mail</label>
                     </FloatLabel>
                 </div>
+                <Button label="Cancelar" className="bg-red-400 border-red-400" />
+                <Button label="Cadastrar" className="bg-green-400 border-green-400" />
             </Card>
                 
         </div>
