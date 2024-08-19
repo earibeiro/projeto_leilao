@@ -76,7 +76,7 @@ const Signup = () => {
                 <Password inputStyle={{ width: '100%' }} className="w-full mb-3" value={confirmPassword} onChange={handleConfirmPasswordChange} toggleMask required/>
                 {confirmPasswordError && <small className="text-red-500">{confirmPasswordError}</small>}
                 <a href="/login"><Button label="Cancelar" className="bg-red-400 border-red-400 m-2" /></a>
-                <a href="/"><Button label="Confirmar" className="bg-green-400 border-green-400 m-2" /></a>
+                <a href="/"><Button label="Confirmar" className="bg-green-400 border-green-400 m-2" disabled={passwordError || confirmPasswordError} /></a>
             </Card>
                 
         </div>
