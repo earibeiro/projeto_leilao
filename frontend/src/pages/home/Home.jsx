@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./Home.css";
 import { Helmet } from 'react-helmet';
+import Logout from "../../components/logout/logout";
+
 
 const Home = () => {
+
     return (
         <div>
             <Helmet>
                 <title>Página Inicial</title>
             </Helmet>
-            <h1>Página Inicial</h1>
+            
+            <Logout/>
         </div>
     );
 }
+
 export default Home;
