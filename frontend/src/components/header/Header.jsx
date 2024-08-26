@@ -1,14 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 import { Toast } from "primereact/toast";
 import "./Header.css";
 import Logout from "../../components/logout/logout";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
     const menuLeft = useRef(null);
     const toast = useRef(null);
-    const [showLogout, setShowLogout] = useState(false);
+    const navigate = useNavigate();
+
     const items = [
         {
             label: 'Opções',
@@ -43,7 +45,8 @@ const Header = () => {
                     label: 'Sair',
                     icon: 'pi pi-fw pi-power-off',
                     command: () => {
-                        setShowLogout(true);
+                        Logout();
+                        navigate('/login');
                     }
                 }
             ]
@@ -58,7 +61,6 @@ const Header = () => {
                 <Toast ref={toast} />
                 <Menu model={items} popup ref={menuLeft} id="popup_menu" />
                 <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
-                {showLogout && <Logout />}
             </div>
         </div>
     );
