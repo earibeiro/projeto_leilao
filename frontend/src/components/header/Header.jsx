@@ -38,7 +38,7 @@ const Header = () => {
                     label: 'Perfil',
                     icon: 'pi pi-fw pi-user',
                     command: () => {
-                        window.location.href = '/perfil';
+                        window.location.href = '/profile';
                     }
                 },
                 {
