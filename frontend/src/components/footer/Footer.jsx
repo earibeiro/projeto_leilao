@@ -5,7 +5,7 @@ const Footer = () => {
     return(
         <div className="footer">
             <div class="grid">
-                <div class="col">
+                <div class="col sm:p-3 flex flex-row flex-wrap align-items-center justify-content-center">
                     <div class="text-left p-3">
                         <ul class="font-bold">Leilões</ul>
                         <ul>Como funciona</ul>

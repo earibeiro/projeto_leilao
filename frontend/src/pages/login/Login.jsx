@@ -32,7 +32,7 @@ const Login = () => {
             <Helmet>
                 <title>Login</title>
             </Helmet>
-            <Card title="Login" subTitle="Insira suas informações de acesso" footer={""} header={""} className="md:w-24rem p-0 card">
+            <Card title="Login" subTitle="Insira suas informações de acesso" footer={""} header={""} className="md:w-24rem h-screen bg--gray-50 p-0 flex align-items-center justify-content-center card">
                 <img src="/img/sitelogo.png" alt="Logo" className="logo" />
                 <label htmlFor="email">Email </label>
                 <InputText inputStyle={{ width: '100%' }} name="email" className="w-full mb-3" onChange={handleChange} aria-describedby="username-help" required/>

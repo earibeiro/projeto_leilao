@@ -57,10 +57,10 @@ const Header = () => {
 
     return(
         <div className="header">
-            <div className="card flex justify-content-center">
+            <div className="left justify-content-center">
                 <Toast ref={toast} />
                 <Menu model={items} popup ref={menuLeft} id="popup_menu" />
-                <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+                <Button label="Menu" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
             </div>
         </div>
     );
