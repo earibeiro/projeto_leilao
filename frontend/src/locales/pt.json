@@ -1,0 +1,30 @@
+{
+    "welcome":"Bem-vindo",
+    "login": "Acessar",
+    "password":"Senha",
+    "email":"Email",
+    "profile": "Perfil",
+    "logout": "Sair",
+    "home": "Página Inicial",
+    "about": "Sobre",
+    "contact": "Contato",
+    "auction": "Leilão",
+    "auctions": "Leilões",
+    "auctionsList": "Lista de Leilões",
+    "auctionsCreate": "Criar Leilão",
+    "auctionsEdit": "Editar Leilão",
+    "auctionsDetails": "Detalhes do Leilão",
+    "auctionsBid": "Dar Lance",
+    "auctionsMyBids": "Meus Lances",
+    "auctionsMyAuctions": "Meus Leilões",
+    "auctionsMyWonAuctions": "Meus Leilões Vencidos",
+    "auctionsMyLostAuctions": "Meus Leilões Perdidos",
+    "auctionsMyActiveAuctions": "Meus Leilões Ativos",
+    "auctionsMyInactiveAuctions": "Meus Leilões Inativos",
+    "button": {
+        "login": "Acessar",
+        "save": "Salvar",
+        "remove": "Remover",
+        "cancel": "Cancelar"
+    }
+}

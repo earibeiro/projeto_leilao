@@ -6,11 +6,13 @@ import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
     const [user, setUser] = useState({email:"", password:""});
     const navigate = useNavigate();
-
+    const {t} = useTranslation();
+    
     const handleChange = (input) =>{
         setUser({...user, [input.target.name]:input.target.value});
     }
@@ -40,7 +42,7 @@ const Login = () => {
                 <Password inputStyle={{ width: '100%' }} name="password" className="w-full mb-3" onChange={handleChange} toggleMask required/>
                 <a href="/recoverpass" className="block text-center text-sm mb-4">Esqueceu a senha?</a>
                 <p className="inline">Não tem uma conta?</p><a href="/signup" className="block text-center text-sm mb-4">Cadastre-se</a>
-                <Button label="Acessar" onClick={login} className="bg-green-400 border-green-400" />
+                <Button label={t('button.login')} onClick={login}  className="bg-green-400 border-green-400" />
             </Card>
 
             

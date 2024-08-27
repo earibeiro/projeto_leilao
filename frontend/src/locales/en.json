@@ -1,0 +1,30 @@
+{
+    "welcome":"Welcome",
+    "login": "Login",
+    "password":"Password",
+    "email":"Email",
+    "profile": "Profile",
+    "logout": "Logout",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "auction": "Auction",
+    "auctions": "Auctions",
+    "auctionsList": "Auctions List",
+    "auctionsCreate": "Create Auction",
+    "auctionsEdit": "Edit Auction",
+    "auctionsDetails": "Auction Details",
+    "auctionsBid": "Bid Auction",
+    "auctionsMyBids": "My Bids",
+    "auctionsMyAuctions": "My Auctions",
+    "auctionsMyWonAuctions": "My Won Auctions",
+    "auctionsMyLostAuctions": "My Lost Auctions",
+    "auctionsMyActiveAuctions": "My Active Auctions",
+    "auctionsMyInactiveAuctions": "My Inactive Auctions",
+    "button": {
+        "login": "Login",
+        "save": "Save",
+        "remove": "Remove",
+        "cancel": "Cancel"
+    }
+}
