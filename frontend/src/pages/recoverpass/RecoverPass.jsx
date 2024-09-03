@@ -1,5 +1,5 @@
 import React from 'react';
-import './RecoverPass.css';
+import './RecoverPass.module.css';
 import { Helmet } from 'react-helmet';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';

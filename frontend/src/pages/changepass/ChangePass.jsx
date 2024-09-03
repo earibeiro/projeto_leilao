@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ChangePass.css";
+import "./ChangePass.module.css";
 import { Password } from 'primereact/password';
 import { Card } from 'primereact/card';
 import { Helmet } from 'react-helmet';
