@@ -21,6 +21,10 @@
     "auctionsMyLostAuctions": "My Lost Auctions",
     "auctionsMyActiveAuctions": "My Active Auctions",
     "auctionsMyInactiveAuctions": "My Inactive Auctions",
+    "insertInfo": "Insert your login information",
+    "noAccount": "Don't have an account?",
+    "forgotPassword": "Forgot your password?",
+    "signupNow": "Sign up",
     "button": {
         "login": "Login",
         "save": "Save",

@@ -1,5 +1,5 @@
 {
-    "welcome":"Bem-vindo",
+    "welcome":"Seja Bem-vindo",
     "login": "Acessar",
     "password":"Senha",
     "email":"Email",
@@ -21,6 +21,10 @@
     "auctionsMyLostAuctions": "Meus Leilões Perdidos",
     "auctionsMyActiveAuctions": "Meus Leilões Ativos",
     "auctionsMyInactiveAuctions": "Meus Leilões Inativos",
+    "insertInfo": "Insira suas informações de acesso",
+    "noAccount": "Não tem uma conta?",
+    "forgotPassword": "Esqueceu sua senha?",
+    "signupNow": "Cadastre-se",
     "button": {
         "login": "Acessar",
         "save": "Salvar",

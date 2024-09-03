@@ -1,14 +1,83 @@
-import React, { useRef } from "react";
-import style from "./Home.module.css";
-import { Helmet } from 'react-helmet';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
-
+import { Button } from 'primereact/button';
+import { Carousel } from 'primereact/carousel';
+import { Tag } from 'primereact/tag';
+import { ProductService } from '../../services/ProductService';
+import { Helmet } from 'react-helmet';
+import style from './Home.module.css';
 
 const Home = () => {
-    const {t, i18n} = useTranslation();
+    const { i18n } = useTranslation();
+    const [products, setProducts] = useState([]);
+    const [language, setLanguage] = useState('en');
 
-    const changeLanguage = (language) => {
-        i18n.changeLanguage(language);
+    const responsiveOptions = [
+        {
+            breakpoint: '1400px',
+            numVisible: 2,
+            numScroll: 1
+        },
+        {
+            breakpoint: '1199px',
+            numVisible: 3,
+            numScroll: 1
+        },
+        {
+            breakpoint: '767px',
+            numVisible: 2,
+            numScroll: 1
+        },
+        {
+            breakpoint: '575px',
+            numVisible: 1,
+            numScroll: 1
+        }
+    ];
+
+    const getSeverity = (product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
+
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
+        }
+    };
+
+    useEffect(() => {
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+    }, []);
+
+    const productTemplate = (product) => {
+        return (
+            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                <div className="mb-3">
+                    <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} className="w-6 shadow-2" />
+                </div>
+                <div>
+                    <h4 className="mb-1">{product.name}</h4>
+                    <h6 className="mt-0 mb-3">${product.price}</h6>
+                    <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                    <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                        <Button icon="pi pi-search" className="p-button p-button-rounded" />
+                        <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    const changeLanguage = () => {
+        const newLanguage = language === 'en' ? 'pt-BR' : 'en';
+        setLanguage(newLanguage);
+        i18n.changeLanguage(newLanguage);
     }
 
     return (
@@ -16,9 +85,13 @@ const Home = () => {
             <Helmet>
                 <title>Página Inicial</title>
             </Helmet>
-            <h1 className={`h-screen flex justify-content-center ${style.textColor}`}>Seja {t('welcome')} à Página Inicial</h1>
-            <button onClick={()=>changeLanguage('en')}>English</button>
-            <button onClick={()=>changeLanguage('pt-BR')}>Português</button>
+            <button onClick={changeLanguage} className={style.languageButton}>
+                {language === 'en' ? 'Português' : 'English'}
+            </button>
+            <div className="card">
+                <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} className="custom-carousel" circular
+                    autoplayInterval={3000} itemTemplate={productTemplate} />
+            </div>
         </div>
     );
 }
