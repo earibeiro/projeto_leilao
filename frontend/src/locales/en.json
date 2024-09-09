@@ -25,10 +25,15 @@
     "noAccount": "Don't have an account?",
     "forgotPassword": "Forgot your password?",
     "signupNow": "Sign up",
+    "fullName": "Full Name",
+    "confirmPassword": "Confirm Password",
+    "insertInfoSignup": "Insert your information to sign up",
+    "createAccount": "Create an Account",
     "button": {
         "login": "Login",
         "save": "Save",
         "remove": "Remove",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "confirm": "Confirm"
     }
 }

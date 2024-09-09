@@ -25,10 +25,15 @@
     "noAccount": "Não tem uma conta?",
     "forgotPassword": "Esqueceu sua senha?",
     "signupNow": "Cadastre-se",
+    "fullName": "Nome Completo",
+    "confirmPassword": "Confirme a senha",
+    "insertInfoSignup": "Insira suas informações para se cadastrar",
+    "createAccount": "Crie uma Conta",
     "button": {
         "login": "Acessar",
         "save": "Salvar",
         "remove": "Remover",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "confirm": "Confirmar"
     }
 }

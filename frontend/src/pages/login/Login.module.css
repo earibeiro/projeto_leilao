@@ -1,7 +1,7 @@
 .cardLogin{
     width: 24rem; 
     height: 100vh; /*É o equivalente ao screen, para ocupar a tela de cima até embaixo*/
-    background-color: #f9fafb;
+    background-color: #ffffff;
     padding: 0;
     display: flex;
     align-items: center;
@@ -55,7 +55,7 @@
 
 @media screen and (max-width: 920px) {
 
-  .container {
+  .containerLog {
     display: flex;
     flex-direction: column;
     align-items: center;

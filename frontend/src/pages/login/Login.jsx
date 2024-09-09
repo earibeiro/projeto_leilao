@@ -35,7 +35,7 @@ const Login = () => {
     }
 
     return (
-        <div className={style.container}>
+        <div className={style.containerLog}>
             <Helmet>
                 <title>Login</title>
             </Helmet>
