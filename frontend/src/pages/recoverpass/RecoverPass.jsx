@@ -1,21 +1,24 @@
 import React from 'react';
-import './RecoverPass.module.css';
+import style from './RecoverPass.module.css';
 import { Helmet } from 'react-helmet';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { useTranslation } from 'react-i18next';
 
 const RecoverPass = () => {
+    const {t} = useTranslation();
+
     return (
-        <div>
+        <div className={style.containerRP}>
             <Helmet>
-                <title>Recuperar senha</title>
+                <title>{t('recoverPassword')}</title>
             </Helmet>
-            <Card title="Recupere sua senha" subTitle="Insira seu e-mail" footer={""} header={""} className="md:w-30rem signupcard">
-                <label htmlFor="emailField" className="mb-1">Digite seu e-mail </label>
-                <InputText inputStyle={{ width: '100%' }} className="w-full mb-3" aria-describedby="username-help" type="email" required/>
-                <a href="/login"><Button label="Cancelar" className="bg-red-400 border-red-400 m-2" /></a>
-                <a href="/changepass"><Button label="Confirmar" className="bg-green-400 border-green-400 m-2" /></a>
+            <Card title={t('recoverPassword')} subTitle={t('insertMail')} footer={""} header={""} className={style.recoverCard}>
+                <label htmlFor="emailField" className="mb-1">{t('insertMail')} </label>
+                <InputText inputStyle={{ width: '100%' }} className={style.inputField} aria-describedby="username-help" type="email" required/>
+                <a href="/login"><Button label="Cancelar" className={style.cancelButton} /></a>
+                <a href="/changepass"><Button label="Confirmar" className={style.confirmButton} /></a>
             </Card>
         </div>
     );

@@ -29,6 +29,12 @@
     "confirmPassword": "Confirm Password",
     "insertInfoSignup": "Insert your information to sign up",
     "createAccount": "Create an Account",
+    "insertMail": "Insert your email",
+    "recoverPassword": "Recover Password",
+    "changePassword": "Change Password",
+    "enterNPassword": "Enter new password",
+    "confirmNPassword": "Confirm new password",
+    "newPassword": "New Password",
     "button": {
         "login": "Login",
         "save": "Save",

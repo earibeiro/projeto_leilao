@@ -29,6 +29,8 @@
     "confirmPassword": "Confirme a senha",
     "insertInfoSignup": "Insira suas informações para se cadastrar",
     "createAccount": "Crie uma Conta",
+    "insertMail": "Insira seu email",
+    "recoverPassword": "Recupere sua Senha",
     "button": {
         "login": "Acessar",
         "save": "Salvar",

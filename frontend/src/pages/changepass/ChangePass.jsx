@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import "./ChangePass.module.css";
+import style from "./ChangePass.module.css";
 import { Password } from 'primereact/password';
 import { Card } from 'primereact/card';
 import { Helmet } from 'react-helmet';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { useTranslation } from 'react-i18next';
 
 const ChangePass = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const {t} = useTranslation();
 
     const validatePassword = (password) => {
         const minLength = /.{6,}/;
@@ -59,23 +61,19 @@ const ChangePass = () => {
     };
 
     return (
-        <div>
+        <div className={style.containerCP}>
             <Helmet>
-                <title>Alterar senha</title>
+                <title>{t('changePassword')}</title>
             </Helmet>
-            <Card title="Alteração de senha" subTitle="Insira uma nova senha e confirme-a" footer={""} header={""} className="md:w-30rem signupcard">
-                <label htmlFor="emailField" className="mb-1">Digite seu e-mail </label>
-                <InputText inputStyle={{ width: '100%' }} className="w-full mb-3" aria-describedby="username-help" type="email" required/>
-                <label htmlFor="codeRecover">Código de recuperação</label>
-                <InputText inputStyle={{ width: '100%' }} className="w-full mb-3" aria-describedby="username-help" required/>
-                <label htmlFor="password">Nova senha </label>
-                <Password inputStyle={{ width: '100%' }} className="w-full mb-3" value={password} onChange={handlePasswordChange} toggleMask required/>
-                {passwordError && <small className="p-error">{passwordError}</small>}
-                <label htmlFor="confirmPassword">Confirme a nova senha </label>
-                <Password inputStyle={{ width: '100%' }} className="w-full mb-3" value={confirmPassword} onChange={handleConfirmPasswordChange} toggleMask required/>
-                {confirmPasswordError && <small className="p-error">{confirmPasswordError}</small>}
-                <a href="/login"><Button label="Cancelar" className="bg-red-400 border-red-400 m-2" /></a>
-                <a href="/"><Button label="Confirmar" className="bg-green-400 border-green-400 m-2" disabled={passwordError || confirmPasswordError} /></a>
+            <Card title={t("changePassword")} subTitle={t("enterNPassword")} className={style.changeCard}>
+                <label htmlFor="password">{t("newPassword")}</label>
+                <Password id="password" className={style.inputField} value={password} onChange={handlePasswordChange} toggleMask required />
+                {passwordError && <small className={style.textRed}>{passwordError}</small>}
+                <label htmlFor="confirmPassword">{t("confirmPassword")}</label>
+                <Password id="confirmPassword" className={style.inputField} value={confirmPassword} onChange={handleConfirmPasswordChange} toggleMask required />
+                {confirmPasswordError && <small className={style.textRed}>{confirmPasswordError}</small>}
+                <a href="/login"><Button label={t("button.cancel")} className={style.cancelButton} /></a>
+                <a href="/"><Button label={t("button.confirm")} className={style.confirmButton} disabled={passwordError || confirmPasswordError} /></a>
             </Card>
         </div>
     );

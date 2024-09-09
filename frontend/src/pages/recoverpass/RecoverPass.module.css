@@ -1,0 +1,37 @@
+.recoverCard {
+	width: 100%;
+	max-width: 30rem;
+	margin: 0 auto;
+	padding: 1rem;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	text-align: center;
+	background: #ffffff;
+}
+
+.inputField {
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+.cancelButton {
+	background-color: #f87171;
+	border: 1px solid #f87171;
+	margin: 0.5rem;
+}
+
+.confirmButton {
+	background-color: #4ade80;
+	border: 1px solid #4ade80;
+	margin: 0.5rem;
+}
+
+.containerRP {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	background-color: #f9fafb
+}
