@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.module.css";
+import style from "./Login.module.css";
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
@@ -34,15 +34,15 @@ const Login = () => {
             <Helmet>
                 <title>Login</title>
             </Helmet>
-            <Card title="Login" subTitle={t('insertInfo')} footer={""} header={""} className="md:w-24rem h-screen bg--gray-50 p-0 flex align-items-center justify-content-center card">
-                <img src="/img/sitelogo.png" alt="Logo" className="logo" />
-                <label htmlFor="email">{t('email')} </label>
-                <InputText inputStyle={{ width: '100%' }} name="email" className="w-full mb-3" onChange={handleChange} aria-describedby="username-help" required/>
-                <label htmlFor="password">{t('password')} </label>
-                <Password inputStyle={{ width: '100%' }} name="password" className="w-full mb-3" onChange={handleChange} toggleMask required/>
-                <a href="/recoverpass" className="block text-center text-sm mb-4">{t('forgotPassword')}</a>
-                <p className="inline">{t('noAccount')}</p><a href="/signup" className="block text-center text-sm mb-4">{t('signupNow')}</a>
-                <Button label={t('button.login')} onClick={login}  className="bg-green-400 border-green-400" />
+            <Card title="Login" subTitle={t('insertInfo')} footer={""} header={""} className={style.cardLogin}>
+                <img src="/img/sitelogo.png" alt="Logo" className={style.logo} />
+                <label className={style.loginLabel} htmlFor="email">{t('email')} </label>
+                <InputText inputStyle={{ width: '100%' }} name="email" className={style.loginMail} onChange={handleChange} aria-describedby="username-help" required/>
+                <label className={style.loginLabel} htmlFor="password">{t('password')} </label>
+                <Password inputStyle={{ width: '100%' }} name="password" className={style.loginPass} onChange={handleChange} toggleMask required/>
+                <a href="/recoverpass" className={style.recPass}>{t('forgotPassword')}</a>
+                <p>{t('noAccount')}</p><a href="/signup" className={style.aLogin}>{t('signupNow')}</a>
+                <Button label={t('button.login')} onClick={login}  className={style.button} />
             </Card>
 
             
