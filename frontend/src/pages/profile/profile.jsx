@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Profile.module.css';
+import style from './Profile.module.css';
 import { Helmet } from 'react-helmet';
 import { Calendar } from 'primereact/calendar';
 import { InputText } from 'primereact/inputtext';

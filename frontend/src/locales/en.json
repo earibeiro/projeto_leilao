@@ -35,6 +35,13 @@
     "enterNPassword": "Enter new password",
     "confirmNPassword": "Confirm new password",
     "newPassword": "New Password",
+    "nomatch": "Passwords don't match",
+    "signup": "Sign up",
+    "minLength": "Password must have at least 6 characters",
+    "minUpper": "Password must have at least 1 uppercase letter",
+    "minLower": "Password must have at least 1 lowercase letter",
+    "minNumber": "Password must have at least 1 number",
+    "minSpecial": "Password must have at least 1 special character",
     "button": {
         "login": "Login",
         "save": "Save",

@@ -17,8 +17,8 @@ const RecoverPass = () => {
             <Card title={t('recoverPassword')} subTitle={t('insertMail')} footer={""} header={""} className={style.recoverCard}>
                 <label htmlFor="emailField" className="mb-1">{t('insertMail')} </label>
                 <InputText inputStyle={{ width: '100%' }} className={style.inputField} aria-describedby="username-help" type="email" required/>
-                <a href="/login"><Button label="Cancelar" className={style.cancelButton} /></a>
-                <a href="/changepass"><Button label="Confirmar" className={style.confirmButton} /></a>
+                <a href="/login"><Button label={t('button.cancel')} className={style.cancelButton} /></a>
+                <a href="/changepass"><Button label={t('button.confirm')} className={style.confirmButton} /></a>
             </Card>
         </div>
     );

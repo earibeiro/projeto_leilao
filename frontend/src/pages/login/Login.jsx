@@ -18,7 +18,6 @@ const Login = () => {
     }
 
     const login = () =>{
-        //chamada para o backend para verificar as credenciais
         if(user.email == "eduardo" && user.password == "A1@bbb"){
             let token = "backend token";
             localStorage.setItem("token", token);

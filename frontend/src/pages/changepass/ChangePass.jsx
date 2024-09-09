@@ -4,7 +4,6 @@ import { Password } from 'primereact/password';
 import { Card } from 'primereact/card';
 import { Helmet } from 'react-helmet';
 import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
 import { useTranslation } from 'react-i18next';
 
 const ChangePass = () => {
@@ -22,19 +21,19 @@ const ChangePass = () => {
         const specialChar = /[!@#$%^&*(),.?":{}|<>]/;
 
         if (!minLength.test(password)) {
-            return "A senha deve ter no mínimo 6 caracteres.";
+            return t('minLength');
         }
         if (!upperCase.test(password)) {
-            return "A senha deve conter pelo menos 1 letra maiúscula.";
+            return t('minUpper');
         }
         if (!lowerCase.test(password)) {
-            return "A senha deve conter pelo menos 1 letra minúscula.";
+            return t('minLower');
         }
         if (!number.test(password)) {
-            return "A senha deve conter pelo menos 1 número.";
+            return t('minNumber');
         }
         if (!specialChar.test(password)) {
-            return "A senha deve conter pelo menos 1 caractere especial.";
+            return t('minSpecial');
         }
         return "";
     };
@@ -44,7 +43,7 @@ const ChangePass = () => {
         setPassword(newPassword);
         setPasswordError(validatePassword(newPassword));
         if (confirmPassword !== newPassword) {
-            setConfirmPasswordError("As senhas não coincidem.");
+            setConfirmPasswordError(t('nomatch'));
         } else {
             setConfirmPasswordError("");
         }
@@ -54,7 +53,7 @@ const ChangePass = () => {
         const newConfirmPassword = e.target.value;
         setConfirmPassword(newConfirmPassword);
         if (newConfirmPassword !== password) {
-            setConfirmPasswordError("As senhas não coincidem.");
+            setConfirmPasswordError(t('nomatch'));
         } else {
             setConfirmPasswordError("");
         }
@@ -73,7 +72,7 @@ const ChangePass = () => {
                 <Password id="confirmPassword" className={style.inputField} value={confirmPassword} onChange={handleConfirmPasswordChange} toggleMask required />
                 {confirmPasswordError && <small className={style.textRed}>{confirmPasswordError}</small>}
                 <a href="/login"><Button label={t("button.cancel")} className={style.cancelButton} /></a>
-                <a href="/"><Button label={t("button.confirm")} className={style.confirmButton} disabled={passwordError || confirmPasswordError} /></a>
+                <a href="/login"><Button label={t("button.confirm")} className={style.confirmButton} disabled={passwordError || confirmPasswordError} /></a>
             </Card>
         </div>
     );

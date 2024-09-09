@@ -17,7 +17,7 @@ const Signup = () => {
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         if (e.target.value !== confirmPassword) {
-            setPasswordError('As senhas não coincidem');
+            setPasswordError(t('nomatch'));
         } else {
             setPasswordError('');
         }
@@ -26,7 +26,7 @@ const Signup = () => {
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
         if (e.target.value !== password) {
-            setConfirmPasswordError('As senhas não coincidem');
+            setConfirmPasswordError(t('nomatch'));
         } else {
             setConfirmPasswordError('');
         }
@@ -35,7 +35,7 @@ const Signup = () => {
     return (
         <div className={style.containerUp}>
             <Helmet>
-                <title>Cadastro</title>
+                <title>{t('signup')}</title>
             </Helmet>
             <Card title={t('signupNow')} subTitle={t('insertInfoSignup')} footer={""} header={""} className={style.signupCard}>
                 <label htmlFor="username">{t('fullName')} </label>
@@ -49,7 +49,7 @@ const Signup = () => {
                 <Password id="confirmPassword" className={style.inputField} value={confirmPassword} onChange={handleConfirmPasswordChange} toggleMask required/>
                 {confirmPasswordError && <small className={style.textRed}>{confirmPasswordError}</small>}
                 <a href="/login"><Button label={t('button.cancel')} className={style.cancelButton} /></a>
-                <a href="/"><Button label={t('button.confirm')} className={style.confirmButton} disabled={passwordError || confirmPasswordError} /></a>
+                <a href="/login"><Button label={t('button.confirm')} className={style.confirmButton} disabled={passwordError || confirmPasswordError} /></a>
             </Card>
         </div>
     );
