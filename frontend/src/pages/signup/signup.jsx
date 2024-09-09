@@ -60,20 +60,20 @@ const Signup = () => {
 
 
     return (
-        <div>
+        <div className={style.container}>
             <Helmet>
                 <title>Cadastro</title>
             </Helmet>
             <Card title="Cadastro" subTitle="Insira seus dados para criar uma conta" footer={""} header={""} className={style.signupCard}>
                 <label htmlFor="username">Nome Completo </label>
-                <InputText inputStyle={{ width: '100%' }} className={style.signinName} aria-describedby="username-help" required/>
+                <InputText inputStyle={{ width: '100%' }} className={style.signinData} aria-describedby="username-help" required/>
                 <label htmlFor="emailField">E-mail </label>
-                <InputText inputStyle={{ width: '100%' }} className={style.signinMail} aria-describedby="username-help" required/>
+                <InputText inputStyle={{ width: '100%' }} className={style.signinData} aria-describedby="username-help" required/>
                 <label htmlFor="password">Senha </label>
-                <Password inputStyle={{ width: '100%' }} className={style.signinPass} value={password} onChange={handlePasswordChange} toggleMask required/>
+                <Password inputStyle={{ width: '100%' }} className={style.signinData} value={password} onChange={handlePasswordChange} toggleMask required/>
                 {passwordError && <small className="text-red-500">{passwordError}</small>}
                 <label htmlFor="confirmPassword">Confirme a senha </label>
-                <Password inputStyle={{ width: '100%' }} className={style.signinPassConf} value={confirmPassword} onChange={handleConfirmPasswordChange} toggleMask required/>
+                <Password inputStyle={{ width: '100%' }} className={style.signinData} value={confirmPassword} onChange={handleConfirmPasswordChange} toggleMask required/>
                 {confirmPasswordError && <small className="text-red-500">{confirmPasswordError}</small>}
                 <a href="/login"><Button label="Cancelar" className="bg-red-400 border-red-400 m-2" /></a>
                 <a href="/"><Button label="Confirmar" className="bg-green-400 border-green-400 m-2" disabled={passwordError || confirmPasswordError} /></a>
