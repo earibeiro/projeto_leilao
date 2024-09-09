@@ -1,4 +1,4 @@
-.signupcard{
+.signupCard{
     margin: 0 auto;
     padding: 5px;
     border-radius: 10px;
@@ -6,6 +6,25 @@
     text-align: center;
 }
 
+.signinName{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.signinMail{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.signinPass{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.signinPassConf{
+    width: 100%;
+    margin-bottom: 1rem;
+}
 
 .p-card-subtitle{
     margin: 0 0 15px 0;
@@ -15,3 +34,10 @@
     padding-top: 10px;
     padding-bottom: 11px;
 }
+
+@media screen and (min-width: 768px) {
+  .md-w-30rem {
+    width: 30rem; /* Define a largura do elemento como 30rem em telas de tamanho médio e acima */
+  }
+}
+

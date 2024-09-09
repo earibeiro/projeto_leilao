@@ -20,7 +20,12 @@ const Login = () => {
     const login = () =>{
         //chamada para o backend para verificar as credenciais
         if(user.email == "eduardo" && user.password == "A1@bbb"){
-            let token="backend token";
+            let token = "backend token";
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", user.email);
+            navigate("/Admin");
+        } else if(user.email == "user" && user.password == "B1@bbb"){
+            let token = "backend token";
             localStorage.setItem("token", token);
             localStorage.setItem("user", user.email);
             navigate("/");
@@ -30,7 +35,7 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className={style.container}>
             <Helmet>
                 <title>Login</title>
             </Helmet>
@@ -43,9 +48,7 @@ const Login = () => {
                 <a href="/recoverpass" className={style.recPass}>{t('forgotPassword')}</a>
                 <p>{t('noAccount')}</p><a href="/signup" className={style.aLogin}>{t('signupNow')}</a>
                 <Button label={t('button.login')} onClick={login}  className={style.button} />
-            </Card>
-
-            
+            </Card>   
         </div>
     );
 }
