@@ -59,7 +59,7 @@ const Header = () => {
 
     return(
         <div className={style.header}>
-            <div className="left justify-content-center">
+            <div className={style.menu}>
                 <Toast ref={toast} />
                 <Menu model={items} popup ref={menuLeft} id="popup_menu" />
                 <Button label="Menu" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />

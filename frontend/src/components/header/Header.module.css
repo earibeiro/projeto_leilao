@@ -3,4 +3,10 @@
     border-radius: 5px;
     padding: 10px;
     background-color: #dfdfdf;
+    display: flex;
+}
+
+.menu {
+    display: flex;
+    text-align: left;
 }

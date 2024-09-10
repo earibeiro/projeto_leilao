@@ -9,7 +9,7 @@ import SimpleLayout from './components/SimpleLayout';
 import RecoverPass from './pages/recoverpass/RecoverPass';
 import PrivateRouter from './components/PrivateRouter';
 import Profile from './pages/profile/Profile';
-import Admin from './pages/admin/Admin';
+import Dashboard from './pages/dashboard/Dashboard';
 
 function App(){
     return(
@@ -18,7 +18,7 @@ function App(){
             <Routes>
                 <Route element={<PrivateRouter/>}>
                 <Route path="/" element={<DefaultLayout><Home/></DefaultLayout>}/>
-                <Route path="/admin" element={<DefaultLayout><Admin/></DefaultLayout>}/>
+                <Route path="/admin" element={<DefaultLayout><Dashboard/></DefaultLayout>}/>
                 <Route path="/profile" element={<DefaultLayout><Profile/></DefaultLayout>}/>
                 </Route>
                 <Route path="/login" element={<SimpleLayout><Login/></SimpleLayout>}/>

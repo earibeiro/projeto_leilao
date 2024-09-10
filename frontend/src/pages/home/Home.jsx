@@ -11,6 +11,7 @@ const Home = () => {
     const { i18n } = useTranslation();
     const [products, setProducts] = useState([]);
     const [language, setLanguage] = useState('en');
+    const {t} = useTranslation();
 
     const responsiveOptions = [
         {
@@ -83,7 +84,7 @@ const Home = () => {
     return (
         <div>
             <Helmet>
-                <title>Página Inicial</title>
+                <title>{t('home')}</title>
             </Helmet>
             <button onClick={changeLanguage} className={style.languageButton}>
                 {language === 'en' ? 'Português' : 'English'}
