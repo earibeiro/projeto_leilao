@@ -1,34 +1,37 @@
 import React from "react";
-import "./Footer.css";
+import style from "./Footer.module.css";
+import { useTranslation} from 'react-i18next';
 
 const Footer = () => {
+    const {t} = useTranslation();
+
     return(
         <div className="footer">
-            <div class="grid">
-                <div class="col sm:p-3 flex flex-row flex-wrap align-items-center justify-content-center">
-                    <div class="text-left p-3">
-                        <ul class="font-bold">Leilões</ul>
-                        <ul>Como funciona</ul>
-                        <ul>Leilões em andamento</ul>
-                        <ul>Leilões encerrados</ul>
-                        <ul>Leilões agendados</ul>
+            <div class={style.grid}>
+                <div class={style.sections}>
+                    <div class={style.textLeft}>
+                    <ul className={style.fontBold}>{t('auctions')}</ul>
+                        <ul>{t('howItWorks')}</ul>
+                        <ul>{t('ongoingAuctions')}</ul>
+                        <ul>{t('closedAuctions')}</ul>
+                        <ul>{t('scheduledAuctions')}</ul>
                     </div>
-                    <div class="text-left p-3">
-                        <ul class="font-bold">Empresa</ul>
-                        <ul>Quem somos</ul>
-                        <ul>Equipe</ul>
-                        <ul>Trabalhe conosco</ul>
+                    <div className={style.textLeft}>
+                        <ul className={style.fontBold}>{t('company')}</ul>
+                        <ul>{t('aboutUs')}</ul>
+                        <ul>{t('team')}</ul>
+                        <ul>{t('careers')}</ul>
                     </div>
-                    <div class="text-left p-3">
-                        <ul class="font-bold">Contato</ul>
-                        <ul>Ajuda e suporte</ul>
-                        <ul>FAQ</ul>
-                        <ul>Entre em contato conosco</ul>
+                    <div class={style.textLeft}>
+                        <ul class={style.fontBold}>{t('contact')}</ul>
+                        <ul>{t('helpnSup')}</ul>
+                        <ul>{t('faq')}</ul>
+                        <ul>{t('contactUs')}</ul>
                     </div>
                 </div>
             </div>
             
-            <p>&copy; 2024</p>
+            <p className={style.footerText}>{t('footerText')}</p>
         </div>
     );
 }

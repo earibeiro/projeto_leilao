@@ -1,0 +1,36 @@
+.footer{
+    border: 1px solid #aaa9a9;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #dfdfdf;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.sections{
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.footerText {
+    color: #333333;
+    font-size: 14px;
+}
+
+.textLeft {
+    text-align: left;
+    padding: 1rem;
+}
+
+.fontBold {
+    font-weight: bold;
+}

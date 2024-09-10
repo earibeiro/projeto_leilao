@@ -1,5 +1,4 @@
 import './App.css';
-//import {PrimeReactProvider} from 'primereact/api';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
@@ -15,18 +14,17 @@ import Admin from './pages/admin/Admin';
 function App(){
     return(
         <>
-        {/* <Header/> */}
         <BrowserRouter>
             <Routes>
                 <Route element={<PrivateRouter/>}>
                 <Route path="/" element={<DefaultLayout><Home/></DefaultLayout>}/>
+                <Route path="/admin" element={<DefaultLayout><Admin/></DefaultLayout>}/>
+                <Route path="/profile" element={<DefaultLayout><Profile/></DefaultLayout>}/>
                 </Route>
                 <Route path="/login" element={<SimpleLayout><Login/></SimpleLayout>}/>
                 <Route path="/signup" element={<SimpleLayout><Signup/></SimpleLayout>}/>
                 <Route path="/recoverpass" element={<SimpleLayout><RecoverPass/></SimpleLayout>}/>
                 <Route path="/changepass" element={<SimpleLayout><ChangePass/></SimpleLayout>}/>
-                <Route path="/profile" element={<DefaultLayout><Profile/></DefaultLayout>}/>
-                <Route path="/admin" element={<DefaultLayout><Admin/></DefaultLayout>}/> 
             </Routes>
         </BrowserRouter>
         </>

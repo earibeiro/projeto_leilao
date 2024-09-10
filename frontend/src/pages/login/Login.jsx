@@ -36,7 +36,7 @@ const Login = () => {
     return (
         <div className={style.containerLog}>
             <Helmet>
-                <title>Login</title>
+                <title>{t('login')}</title>
             </Helmet>
             <Card title="Login" subTitle={t('insertInfo')} footer={""} header={""} className={style.cardLogin}>
                 <img src="/img/sitelogo.png" alt="Logo" className={style.logo} />
