@@ -22,7 +22,7 @@ const Login = () => {
             let token = "backend token";
             localStorage.setItem("token", token);
             localStorage.setItem("user", user.email);
-            navigate("/Admin");
+            navigate("/dashboard");
         } else if(user.email == "user" && user.password == "B1@bbb"){
             let token = "backend token";
             localStorage.setItem("token", token);

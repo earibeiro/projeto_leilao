@@ -5,6 +5,7 @@ import { Calendar } from 'primereact/calendar';
 import { InputText } from 'primereact/inputtext';
 import { InputMask } from 'primereact/inputmask';
 import { cpf as cpfValidator } from 'cpf-cnpj-validator';
+import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
     const [date, setDate] = useState(null);
@@ -17,7 +18,8 @@ const Profile = () => {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [cepError, setCepError] = useState('');
-    const [image, setImage] = useState(null); // Adicionei o estado para a imagem
+    const [image, setImage] = useState(null);
+    const { t } = useTranslation();
 
     const handleCpfChange = (e) => {
         const newCpf = e.target.value;
@@ -26,7 +28,7 @@ const Profile = () => {
         if (cpfValidator.isValid(newCpf)) {
             setCpfError('');
         } else {
-            setCpfError('CPF inválido');
+            setCpfError(t('invalidCpf'));
         }
     };
 
@@ -34,7 +36,7 @@ const Profile = () => {
         const newCep = e.target.value;
         setCep(newCep);
 
-        if (newCep.length === 9) { // Verifica se o CEP está completo
+        if (newCep.length === 9) {
             try {
                 const response = await fetch(`https://viacep.com.br/ws/${newCep.replace('-', '')}/json/`);
                 const data = await response.json();
@@ -74,37 +76,37 @@ const Profile = () => {
             <Helmet>
                 <title>Perfil</title>
             </Helmet>
-            <div className="card justify-content-center">
-                <label htmlFor="profilePicture">Foto de Perfil: </label>
+            <div className={style.cardProfile}>
+                <label htmlFor="profilePicture">{t('profPicture')} </label>
                 <input type="file" accept="image/*" onChange={handleImageChange} />
                 {image && <img src={image} alt="Profile" style={{ width: '100px', height: '100px', marginTop: '10px' }} />}
-                <label htmlFor="username">Nome Completo </label> 
+                <label htmlFor="username">{t('fullName')} </label> 
                 <InputText inputStyle={{ width: '100%' }} className="w-5 mb-3" aria-describedby="username-help" required/>
-                <label htmlFor="emailField">E-mail </label> 
+                <label htmlFor="emailField">{t('email')} </label> 
                 <InputText inputStyle={{ width: '100%' }} className="w-5 mb-3" aria-describedby="username-help" required/>
-                <label htmlFor="calendar" className="pr-1">Data de Nascimento: </label>
+                <label htmlFor="calendar" className="pr-1">{t('birthDate')} </label>
                 <Calendar dateFormat="dd/mm/yy" value={date} onChange={(e) => setDate(e.value)} />
-                <label htmlFor="phone">Telefone: </label>
+                <label htmlFor="phone">{t('phone')} </label>
                 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="(99) 99999-9999" placeholder="(00) 00000-0000"/>
-                <label htmlFor="cpf">CPF: </label>
+                <label htmlFor="cpf">{t('cpf')} </label>
                 <div style={{ position: 'relative' }}>
                     <InputMask value={cpf} onChange={handleCpfChange} mask="999.999.999-99" placeholder="000.000.000-00"/>
                     {cpfError && <small className="error-message">{cpfError}</small>}
                 </div>
-                <label htmlFor="zipCode">CEP: </label>
+                <label htmlFor="zipCode">{t('zipCode')} </label>
                 <InputMask value={cep} onChange={handleCepChange} mask="99999-999" placeholder="00000-000"/>
                 {cepError && <small className="p-error">{cepError}</small>}
-                <label htmlFor="address">Endereço: </label> 
+                <label htmlFor="address">{t('address')} </label> 
                 <InputText value={address} onChange={(e) => setAddress(e.target.value)} inputStyle={{ width: '100%' }} className="w-3 mb-3" aria-describedby="username-help" required/>
-                <label htmlFor="addressNeighborhood">Bairro: </label> 
+                <label htmlFor="addressNeighborhood">{t('neighborhood')} </label> 
                 <InputText value={neighborhood} onChange={(e) => setNeighborhood(e.target.value)} inputStyle={{ width: '100%' }} className="w-3 mb-3" aria-describedby="username-help" required/>
-                <label htmlFor="addressCity">Cidade: </label> 
+                <label htmlFor="addressCity">{t('city')} </label> 
                 <InputText value={city} onChange={(e) => setCity(e.target.value)} inputStyle={{ width: '100%' }} className="w-3 mb-3" aria-describedby="username-help" required/>
-                <label htmlFor="addressState">Estado: </label> 
+                <label htmlFor="addressState">{t('state')} </label> 
                 <InputText value={state} onChange={(e) => setState(e.target.value)} inputStyle={{ width: '100%' }} className="w-3 mb-3" aria-describedby="username-help" required/>
-                <label htmlFor="addressNumber">Número: </label> 
+                <label htmlFor="addressNumber">{t('houseNumber')} </label> 
                 <InputText inputStyle={{ width: '100%' }} className="w-1 mb-3" aria-describedby="username-help" required/>
-                <label htmlFor="addressComplement">Complemento: </label> 
+                <label htmlFor="addressComplement">{t('complement')} </label> 
                 <InputText inputStyle={{ width: '100%' }} className="w-2 mb-3" aria-describedby="username-help" required/>
             </div>
         </div>

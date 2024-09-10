@@ -18,7 +18,7 @@ function App(){
             <Routes>
                 <Route element={<PrivateRouter/>}>
                 <Route path="/" element={<DefaultLayout><Home/></DefaultLayout>}/>
-                <Route path="/admin" element={<DefaultLayout><Dashboard/></DefaultLayout>}/>
+                <Route path="/dashboard" element={<DefaultLayout><Dashboard/></DefaultLayout>}/>
                 <Route path="/profile" element={<DefaultLayout><Profile/></DefaultLayout>}/>
                 </Route>
                 <Route path="/login" element={<SimpleLayout><Login/></SimpleLayout>}/>
