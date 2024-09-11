@@ -1,43 +1,48 @@
-.changeCard {
-	width: 100%;
-	max-width: 30rem;
-	margin: 0 auto;
-	padding: 1rem;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	text-align: center;
-	background: #ffffff;
-}
-
-.inputField {
-	width: 100%;
-	margin-bottom: 1rem;
-    padding: 0.5rem;
-    display: block;
-}
-
-.cancelButton {
-	background-color: #f87171;
-	border: 1px solid #f87171;
-	margin: 0.5rem;
-}
-
-.confirmButton {
-	background-color: #4ade80;
-	border: 1px solid #4ade80;
-	margin: 0.5rem;
-}
-
 .containerCP {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	background-color: #f9fafb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.changeCard {
+    width: 500px;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #f9fafb;
+    box-shadow: 0 4px 8px 0 rgba(231, 216, 216, 0.2);
 }
 
 .textRed {
-	color: #ef4444;
+    color: red;
+    margin-top: 4px; /* Adiciona margem superior para espaçamento */
+}
+
+.cancelButton {
+    background-color: #f44336;
+    border: none;
+}
+
+.confirmButton {
+    background-color: #4caf50;
+    border: none;
+}
+
+@media screen and (max-width: 600px) {
+    .changeCard {
+        padding: 1rem; /* Reduz o padding em telas menores */
+    }
+
+    .flex {
+        flex-direction: column; /* Alinha os elementos verticalmente em telas menores */
+    }
+
+    .justify-content-between {
+        justify-content: center; /* Centraliza os botões em telas menores */
+    }
+
+    .cancelButton, .confirmButton {
+        width: 100%; /* Faz os botões ocuparem 100% da largura em telas menores */
+        margin-bottom: 0.5rem; /* Adiciona margem inferior para espaçamento entre os botões */
+    }
 }

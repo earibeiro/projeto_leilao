@@ -7,18 +7,22 @@ import { InputText } from 'primereact/inputtext';
 import { useTranslation } from 'react-i18next';
 
 const RecoverPass = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <div className={style.containerRP}>
             <Helmet>
                 <title>{t('recoverPassword')}</title>
             </Helmet>
-            <Card title={t('recoverPassword')} subTitle={t('insertMail')} footer={""} header={""} className={style.recoverCard}>
-                <label htmlFor="emailField" className="mb-1">{t('insertMail')} </label>
-                <InputText inputStyle={{ width: '100%' }} className={style.inputField} aria-describedby="username-help" type="email" required/>
-                <a href="/login"><Button label={t('button.cancel')} className={style.cancelButton} /></a>
-                <a href="/changepass"><Button label={t('button.confirm')} className={style.confirmButton} /></a>
+            <Card title={<div className={style.title}>{t('recoverPassword')}</div>} subTitle={<div className={style.subtitle}>{t('insertMail')}</div>} footer={""} header={""} className={style.recoverCard}>
+                <div className={`${style.inputGroup} mb-2`}>
+                    <label htmlFor="emailField" className={style.label}>{t('insertMail')}</label>
+                    <InputText id="emailField" name="email" className={style.inputField} aria-describedby="username-help" type="email" required />
+                </div>
+                <div className="flex justify-content-between mt-4">
+                    <a href="/login"><Button label={t('button.cancel')} className={style.cancelButton} /></a>
+                    <a href="/changepass"><Button label={t('button.confirm')} className={style.confirmButton} /></a>
+                </div>
             </Card>
         </div>
     );

@@ -40,13 +40,17 @@ const Login = () => {
             </Helmet>
             <Card title="Login" subTitle={t('insertInfo')} footer={""} header={""} className={style.cardLogin}>
                 <img src="/img/sitelogo.png" alt="Logo" className={style.logo} />
-                <label className={style.loginLabel} htmlFor="email">{t('email')} </label>
-                <InputText inputStyle={{ width: '100%' }} name="email" className={style.loginMail} onChange={handleChange} aria-describedby="username-help" required/>
-                <label className={style.loginLabel} htmlFor="password">{t('password')} </label>
-                <Password inputStyle={{ width: '100%' }} name="password" className={style.loginPass} onChange={handleChange} toggleMask required/>
+                <div className="flex align-items-center m-2">
+                    <label className={`${style.loginLabel} mr-2`} htmlFor="email">{t('email')}</label>
+                    <InputText name="email" className="flex-grow-1" onChange={handleChange} aria-describedby="username-help" required/>
+                </div>
+                <div className="flex align-items-center m-2">
+                    <label className={`${style.loginLabel} mr-2`} htmlFor="password">{t('password')}</label>
+                    <Password inputStyle={{width:'100%'}} name="password" className="flex-grow-1" onChange={handleChange} feedback={false} toggleMask required/>
+                </div>
                 <a href="/recoverpass" className={style.recPass}>{t('forgotPassword')}</a>
-                <p>{t('noAccount')}</p><a href="/signup" className={style.aLogin}>{t('signupNow')}</a>
-                <Button label={t('button.login')} onClick={login}  className={style.button} />
+                <p>{t('noAccount')}<a href="/signup" className={style.aLogin}>{t('signupNow')}</a></p>
+                <Button label={t('button.login')} onClick={login} className={style.button} />
             </Card>   
         </div>
     );

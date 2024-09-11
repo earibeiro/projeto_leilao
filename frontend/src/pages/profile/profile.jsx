@@ -81,9 +81,9 @@ const Profile = () => {
                 <input type="file" accept="image/*" onChange={handleImageChange} />
                 {image && <img src={image} alt="Profile" style={{ width: '100px', height: '100px', marginTop: '10px' }} />}
                 <label htmlFor="username">{t('fullName')} </label> 
-                <InputText inputStyle={{ width: '100%' }} className="w-5 mb-3" aria-describedby="username-help" required/>
+                <InputText className="w-5 mb-3" aria-describedby="username-help" required/>
                 <label htmlFor="emailField">{t('email')} </label> 
-                <InputText inputStyle={{ width: '100%' }} className="w-5 mb-3" aria-describedby="username-help" required/>
+                <InputText className="w-5 mb-3" aria-describedby="username-help" required/>
                 <label htmlFor="calendar" className="pr-1">{t('birthDate')} </label>
                 <Calendar dateFormat="dd/mm/yy" value={date} onChange={(e) => setDate(e.value)} />
                 <label htmlFor="phone">{t('phone')} </label>

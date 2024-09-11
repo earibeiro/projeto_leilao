@@ -1,37 +1,71 @@
+.containerRP {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	padding: 1rem; /* Adiciona padding para evitar que o conteúdo encoste nas bordas */
+}
+
 .recoverCard {
 	width: 100%;
-	max-width: 30rem;
-	margin: 0 auto;
-	padding: 1rem;
+	max-width: 500px;
+	padding: 2rem;
 	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	background-color: #f9fafb;
+	box-shadow: 0 4px 8px 0 rgba(231, 216, 216, 0.2);
+}
+
+.title {
 	text-align: center;
-	background: #ffffff;
+}
+
+.subtitle {
+	text-align: center; /* Centraliza o subtítulo */
+}
+
+.inputGroup {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.label {
+	min-width: 100px; /* Garante que o label tenha uma largura mínima */
 }
 
 .inputField {
-	width: 100%;
-	margin-bottom: 1rem;
+	flex-grow: 1;
+	min-width: 0; /* Garante que o input não ultrapasse os limites do contêiner */
 }
 
 .cancelButton {
-	background-color: #f87171;
-	border: 1px solid #f87171;
-	margin: 0.5rem;
+	background-color: #f44336;
+	border: none;
+	margin-right: 1rem;
 }
 
 .confirmButton {
-	background-color: #4ade80;
-	border: 1px solid #4ade80;
-	margin: 0.5rem;
+	background-color: #4caf50;
+	border: none;
 }
 
-.containerRP {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	background-color: #f9fafb
+/* Regras de mídia para dispositivos móveis */
+@media screen and (max-width: 600px) {
+	.recoverCard {
+		padding: 1rem; /* Reduz o padding em telas menores */
+	}
+
+	.inputGroup {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.inputField {
+		width: 100%; /* Faz o campo de input ocupar 100% da largura em telas menores */
+	}
+
+	.cancelButton, .confirmButton {
+		width: 100%; /* Faz os botões ocuparem 100% da largura em telas menores */
+		margin-bottom: 0.5rem; /* Adiciona margem inferior para espaçamento entre os botões */
+	}
 }

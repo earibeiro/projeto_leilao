@@ -64,15 +64,21 @@ const ChangePass = () => {
             <Helmet>
                 <title>{t('changePassword')}</title>
             </Helmet>
-            <Card title={t("changePassword")} subTitle={t("enterNPassword")} className={style.changeCard}>
-                <label htmlFor="password">{t("newPassword")}</label>
-                <Password id="password" className={style.inputField} value={password} onChange={handlePasswordChange} toggleMask required />
-                {passwordError && <small className={style.textRed}>{passwordError}</small>}
-                <label htmlFor="confirmPassword">{t("confirmPassword")}</label>
-                <Password id="confirmPassword" className={style.inputField} value={confirmPassword} onChange={handleConfirmPasswordChange} toggleMask required />
-                {confirmPasswordError && <small className={style.textRed}>{confirmPasswordError}</small>}
-                <a href="/login"><Button label={t("button.cancel")} className={style.cancelButton} /></a>
-                <a href="/login"><Button label={t("button.confirm")} className={style.confirmButton} disabled={passwordError || confirmPasswordError} /></a>
+            <Card title={t('changePassword')} subTitle={t('enterNPassword')} className={style.changeCard}>
+                <div className="flex align-items-center mb-2">
+                    <label htmlFor="password" className="mr-2" style={{ minWidth: '150px' }}>{t('newPassword')}</label>
+                    <Password id="password" className="flex-grow-1" inputStyle={{ width: '100%' }} value={password} feedback={false} onChange={handlePasswordChange} toggleMask required />
+                </div>
+                {passwordError && <small className={`${style.textRed} mb-2`}>{passwordError}</small>}
+                <div className="flex align-items-center mb-2">
+                    <label htmlFor="confirmPassword" className="mr-2" style={{ minWidth: '150px' }}>{t('confirmPassword')}</label>
+                    <Password id="confirmPassword" className="flex-grow-1" inputStyle={{ width: '100%' }} value={confirmPassword} feedback={false} onChange={handleConfirmPasswordChange} toggleMask required />
+                </div>
+                {confirmPasswordError && <small className={`${style.textRed} mb-2`}>{confirmPasswordError}</small>}
+                <div className="flex justify-content-between mt-4">
+                    <a href="/login"><Button label={t('button.cancel')} className={style.cancelButton} /></a>
+                    <a href="/login"><Button label={t('button.confirm')} className={style.confirmButton} disabled={passwordError || confirmPasswordError} /></a>
+                </div>
             </Card>
         </div>
     );
