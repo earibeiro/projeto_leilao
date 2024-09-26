@@ -3,7 +3,7 @@
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	padding: 1rem; /* Adiciona padding para evitar que o conteúdo encoste nas bordas */
+	padding: 1rem;
 }
 
 .recoverCard {
@@ -20,7 +20,7 @@
 }
 
 .subtitle {
-	text-align: center; /* Centraliza o subtítulo */
+	text-align: center;
 }
 
 .inputGroup {
@@ -30,12 +30,13 @@
 }
 
 .label {
-	min-width: 100px; /* Garante que o label tenha uma largura mínima */
+	min-width: 100px;
+	margin-right: 10px;
 }
 
 .inputField {
 	flex-grow: 1;
-	min-width: 0; /* Garante que o input não ultrapasse os limites do contêiner */
+	min-width: 0;
 }
 
 .cancelButton {
@@ -49,10 +50,9 @@
 	border: none;
 }
 
-/* Regras de mídia para dispositivos móveis */
 @media screen and (max-width: 600px) {
 	.recoverCard {
-		padding: 1rem; /* Reduz o padding em telas menores */
+		padding: 1rem;
 	}
 
 	.inputGroup {
@@ -61,11 +61,11 @@
 	}
 
 	.inputField {
-		width: 100%; /* Faz o campo de input ocupar 100% da largura em telas menores */
+		width: 100%;
 	}
 
 	.cancelButton, .confirmButton {
-		width: 100%; /* Faz os botões ocuparem 100% da largura em telas menores */
-		margin-bottom: 0.5rem; /* Adiciona margem inferior para espaçamento entre os botões */
+		width: 100%; 
+		margin-bottom: 0.5rem;
 	}
 }
