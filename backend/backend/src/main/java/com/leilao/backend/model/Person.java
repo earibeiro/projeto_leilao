@@ -27,7 +27,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Preenchimento Obrigatório")
+    @NotBlank(message = "{name.required}")
     private String name;
 
     @Email(message = "Email inválido")
