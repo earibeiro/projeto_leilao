@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -25,8 +27,17 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Preenchimento Obrigatório")
     private String name;
+
+    @Email(message = "Email inválido")
     private String email;
+
+    //@CPF(message = "CPF inválido")
+    //private String cpf;
+
+    //@Min(0)
+    //private int idade;
 
     @JsonIgnore
     private String password;
