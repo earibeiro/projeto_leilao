@@ -1,18 +1,32 @@
 package com.leilao.backend.model;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
@@ -20,9 +34,10 @@ import lombok.Data;
 import lombok.Setter;
 
 @Entity
-@Table(name="person")
 @Data
-public class Person {
+@Table(name="person")
+@JsonIgnoreProperties({"authorities"})
+public class Person implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,25 +45,33 @@ public class Person {
     @NotBlank(message = "{name.required}")
     private String name;
 
-    @Email(message = "Email inválido")
+    @Email(message = "{name.invalid}")
+    @UniqueElements (message = "Email já cadastrado")
     private String email;
 
-    //@CPF(message = "CPF inválido")
-    //private String cpf;
+    //@CPF
+    private String cpf;
 
     //@Min(0)
     //private int idade;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @Transient // Sempre que não quiser gerar uma coluna no banco de dados, use o Transient
+    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public void setPassword(String password) {
+        this.password = passwordEncoder.encode(password);
+    }
 
     @JsonIgnore
     @Column(name = "validation_code")
-    private String validationCode;
+    private Integer validationCode;
 
     @JsonIgnore
-    private LocalDateTime validationCodeValidity;
-    @OneToMany(mappedBy = "person", orphanRemoval=true, cascade = CascadeType.ALL)
+    private Date validationCodeValidity;
+    @OneToMany(mappedBy = "person", orphanRemoval=true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Setter(value = AccessLevel.NONE)
     private List<PersonProfile> personProfile;
     
@@ -57,5 +80,17 @@ public class Person {
             p.setPerson(this);
         }
         personProfile = lpp;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return personProfile.stream()
+            .map(userRole -> new SimpleGrantedAuthority(userRole.getProfile().getName()))
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 }
