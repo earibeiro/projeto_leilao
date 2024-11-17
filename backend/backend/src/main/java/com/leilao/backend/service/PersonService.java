@@ -2,7 +2,6 @@ package com.leilao.backend.service;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,59 +33,46 @@ public class PersonService implements UserDetailsService {
     }
 
     public String passwordCodeRequest(String email) {
-        Optional<Person> person = personRepository.findByEmail(email);
-        if(person!=null) {
-            Person personDatabase = person.get();
-            personDatabase.setValidationCode(genValidationCode());
-            personDatabase.setValidationCodeValidity(LocalDateTime.now().plusMinutes(5));
-            personRepository.save(personDatabase);
-            Context context = new Context();
-            context.setVariable("name", personDatabase.getName());
-            context.setVariable("code", personDatabase.getValidationCode());
-            try {
-                emailService.sendTemplateEmail(
-                    personDatabase.getEmail(), 
-                    "Código de Recuperação de Senha", context, 
-                    "email");
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            } 
+        Person person = personRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Pessoa não encontrada"));
+        person.setValidationCode(genValidationCode());
+        person.setValidationCodeValidity(LocalDateTime.now().plusMinutes(5));
+        personRepository.save(person);
+        Context context = new Context();
+        context.setVariable("code", person.getValidationCode());
+        try {
+            emailService.sendTemplateEmail(
+                person.getEmail(), 
+                "Recuperação de Senha", context, 
+                "email");
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
-        return "Email enviado com sucesso";
+        return "Código enviado para o email";
     }
-
+    
     public String passwordRecovery(PersonRecoveryDTO personRecoveryDTO) {
-        Optional<Person> person = personRepository.findByEmail(personRecoveryDTO.getEmail());
-        if(person != null ) {
-            if (person.get().getValidationCode() != personRecoveryDTO.getValidationCode()) {
-                if (person.get().getValidationCodeValidity().isBefore(LocalDateTime.now())) {
-                    return "Código expirado";
-                }
-                Person personSaved = person.get();
-                personSaved.setPassword(personRecoveryDTO.getPassword());
-                personSaved.setValidationCode(null);
-                personSaved.setValidationCodeValidity(null);
-                personRepository.save(personSaved);
-                return "Senha alterada com sucesso";
-            }
-            return "Código inválido";
+        Person person = personRepository.findByEmail(personRecoveryDTO.getEmail()).orElseThrow(() -> new NoSuchElementException("Pessoa não encontrada"));
+        if(person.getValidationCode() == personRecoveryDTO.getCode()) {
+            if (person.getValidationCodeValidity().isBefore(LocalDateTime.now())) {
+                return "Código expirado";
+            } 
+            person.setPassword(personRecoveryDTO.getPassword());
+            person.setValidationCode(null);
+            personRepository.save(person);
+            return "Senha alterada com sucesso";
         }
-        return "Pessoa não encontrada";
+        return "Código inválido";
     }
 
     public String emailValidate(PersonEmailValidateDTO personEmailValidateDTO) {
-        Optional<Person> person = personRepository.findByEmail(personEmailValidateDTO.getEmail());
-        if(person != null) {
-            if(person.get().getValidationCode() == personEmailValidateDTO.getCode()) {
-                Person personSaved = person.get();
-                personSaved.setEnabled(true);
-                personSaved.setValidationCode(null);
-                personRepository.save(personSaved);
+        Person person = personRepository.findByEmail(personEmailValidateDTO.getEmail()).orElseThrow(() -> new NoSuchElementException("Pessoa não encontrada"));
+            if(person.getValidationCode() == personEmailValidateDTO.getCode()) {
+                person.setEnabled(true);
+                person.setValidationCode(null);
+                personRepository.save(person);
                 return "Email validado com sucesso";
             }
             return "Código inválido";
-        }
-        return "Email não validado";
     }
 
     public Person create(Person person) {

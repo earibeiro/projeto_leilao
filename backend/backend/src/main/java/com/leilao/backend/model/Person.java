@@ -73,7 +73,6 @@ public class Person implements UserDetails {
 
     @OneToMany(mappedBy = "person", orphanRemoval=true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Setter(value = AccessLevel.NONE)
-    @JsonIgnore
     private List<PersonProfile> personProfile;
     
     public void setPersonProfile(List<PersonProfile> lpp) {

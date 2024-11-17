@@ -6,11 +6,11 @@ import lombok.Data;
 public class PersonRecoveryDTO {
     String email;
     String password;
-    int validationCode;
+    int code;
 
-    public PersonRecoveryDTO(String email, String password, int validationCode) {
+    public PersonRecoveryDTO(String email, String password, int code) {
         this.email = email;
         this.password = password;
-        this.validationCode = validationCode;
+        this.code = code;
     }
 }
