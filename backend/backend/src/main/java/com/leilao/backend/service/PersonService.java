@@ -63,6 +63,8 @@ public class PersonService implements UserDetailsService {
                 }
                 Person personSaved = person.get();
                 personSaved.setPassword(personRecoveryDTO.getPassword());
+                personSaved.setValidationCode(null);
+                personSaved.setValidationCodeValidity(null);
                 personRepository.save(personSaved);
                 return "Senha alterada com sucesso";
             }
@@ -72,8 +74,10 @@ public class PersonService implements UserDetailsService {
     }
 
     public Person create(Person person) {
+        person.setValidationCode(genValidationCode());
         Person personSaved = personRepository.save(person);
         Context context = new Context();
+        context.setVariable("code", personSaved.getValidationCode());
         context.setVariable("name", personSaved.getName());
         try {
             emailService.sendTemplateEmail(
