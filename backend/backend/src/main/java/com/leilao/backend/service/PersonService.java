@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
 import com.leilao.backend.model.Person;
+import com.leilao.backend.model.PersonEmailValidateDTO;
 import com.leilao.backend.model.PersonRecoveryDTO;
 import com.leilao.backend.repository.PersonRepository;
 
@@ -73,8 +74,24 @@ public class PersonService implements UserDetailsService {
         return "Pessoa não encontrada";
     }
 
+    public String emailValidate(PersonEmailValidateDTO personEmailValidateDTO) {
+        Optional<Person> person = personRepository.findByEmail(personEmailValidateDTO.getEmail());
+        if(person != null) {
+            if(person.get().getValidationCode() == personEmailValidateDTO.getCode()) {
+                Person personSaved = person.get();
+                personSaved.setEnabled(true);
+                personSaved.setValidationCode(null);
+                personRepository.save(personSaved);
+                return "Email validado com sucesso";
+            }
+            return "Código inválido";
+        }
+        return "Email não validado";
+    }
+
     public Person create(Person person) {
         person.setValidationCode(genValidationCode());
+        person.setEnabled(false);
         Person personSaved = personRepository.save(person);
         Context context = new Context();
         context.setVariable("code", personSaved.getValidationCode());

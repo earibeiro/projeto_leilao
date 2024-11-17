@@ -1,5 +1,7 @@
 package com.leilao.backend.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.leilao.backend.model.Person;
 import com.leilao.backend.model.PersonAuthRequestDTO;
 import com.leilao.backend.model.PersonAuthResponseDTO;
+import com.leilao.backend.model.PersonEmailValidateDTO;
 import com.leilao.backend.model.PersonRecoveryDTO;
+import com.leilao.backend.repository.PersonRepository;
 import com.leilao.backend.security.JwtService;
 import com.leilao.backend.service.PersonService;
 
@@ -25,6 +29,9 @@ public class PersonController {
     
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private PersonRepository personRepository;
     
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -34,6 +41,10 @@ public class PersonController {
 
     @PostMapping("/login")
     public PersonAuthResponseDTO authenticateUser(@RequestBody PersonAuthRequestDTO authRequest) {
+        Optional<Person> person = personRepository.findByEmail(authRequest.getEmail());
+        if (person.get().isEnabled() == false) {
+            return new PersonAuthResponseDTO(authRequest.getEmail(), "Email não validado");
+        }
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
                 authRequest.getEmail(), authRequest.getPassword()));
@@ -49,6 +60,11 @@ public class PersonController {
     @PostMapping("/passwordRecovery")
     public String passwordRecovery(@RequestBody PersonRecoveryDTO personRecoveryDTO) {
         return personService.passwordRecovery(personRecoveryDTO);
+    }
+
+    @PostMapping("/emailValidate")
+    public String emailValidate(@RequestBody PersonEmailValidateDTO personEmailValidateDTO) {
+        return personService.emailValidate(personEmailValidateDTO);
     }
 
     @PostMapping
