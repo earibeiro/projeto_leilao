@@ -1,6 +1,5 @@
 package com.leilao.backend.controller;
 
-import org.apache.catalina.authenticator.SpnegoAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.leilao.backend.model.Person;
 import com.leilao.backend.model.PersonAuthRequestDTO;
 import com.leilao.backend.model.PersonAuthResponseDTO;
+import com.leilao.backend.model.PersonRecoveryDTO;
 import com.leilao.backend.security.JwtService;
 import com.leilao.backend.service.PersonService;
 
-import jakarta.security.auth.message.config.AuthConfig;
 import jakarta.validation.Valid;
 
 @RestController
@@ -43,12 +42,17 @@ public class PersonController {
     }
 
     @PostMapping("/passwordCodeRequest")
-    public String passwordCodeRequest(@RequestBody PersonAuthRequestDTO person){
-        return personService.passwordCodeRequest(person);
+    public String passwordCodeRequest(@RequestBody PersonRecoveryDTO personRecoveryDTO) {
+        return personService.passwordCodeRequest(personRecoveryDTO.getEmail());
+    }
+
+    @PostMapping("/passwordRecovery")
+    public String passwordRecovery(@RequestBody PersonRecoveryDTO personRecoveryDTO) {
+        return personService.passwordRecovery(personRecoveryDTO);
     }
 
     @PostMapping
-    public Person create(@Valid @RequestBody Person person) {
+    public Person create(@RequestBody Person person) {
         return personService.create(person);
     }
 

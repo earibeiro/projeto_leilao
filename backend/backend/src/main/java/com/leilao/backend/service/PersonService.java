@@ -1,8 +1,9 @@
 package com.leilao.backend.service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
 import com.leilao.backend.model.Person;
-import com.leilao.backend.model.PersonAuthRequestDTO;
+import com.leilao.backend.model.PersonRecoveryDTO;
 import com.leilao.backend.repository.PersonRepository;
 
 import jakarta.mail.MessagingException;
@@ -31,20 +32,43 @@ public class PersonService implements UserDetailsService {
         return personRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    public String passwordCodeRequest(PersonAuthRequestDTO personAuthRequestDTO) {
-        Optional<Person> person = personRepository.findByEmail(personAuthRequestDTO.getEmail());
+    public String passwordCodeRequest(String email) {
+        Optional<Person> person = personRepository.findByEmail(email);
         if(person!=null) {
             Person personDatabase = person.get();
-            // gerar um numero random
-            personDatabase.setValidationCode(123456);
-            // aumentar uns 5 ou 10 minutos da data atual
-            personDatabase.setValidationCodeValidity(new Date());
+            personDatabase.setValidationCode(genValidationCode());
+            personDatabase.setValidationCodeValidity(LocalDateTime.now().plusMinutes(5));
             personRepository.save(personDatabase);
-
-            // enviar o email com o código semelhante ao que foi feito no cadastro - método create 
+            Context context = new Context();
+            context.setVariable("name", personDatabase.getName());
+            context.setVariable("code", personDatabase.getValidationCode());
+            try {
+                emailService.sendTemplateEmail(
+                    personDatabase.getEmail(), 
+                    "Código de Recuperação de Senha", context, 
+                    "email");
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            } 
         }
-
         return "Email enviado com sucesso";
+    }
+
+    public String passwordRecovery(PersonRecoveryDTO personRecoveryDTO) {
+        Optional<Person> person = personRepository.findByEmail(personRecoveryDTO.getEmail());
+        if(person != null ) {
+            if (person.get().getValidationCode() != personRecoveryDTO.getValidationCode()) {
+                if (person.get().getValidationCodeValidity().isBefore(LocalDateTime.now())) {
+                    return "Código expirado";
+                }
+                Person personSaved = person.get();
+                personSaved.setPassword(personRecoveryDTO.getPassword());
+                personRepository.save(personSaved);
+                return "Senha alterada com sucesso";
+            }
+            return "Código inválido";
+        }
+        return "Pessoa não encontrada";
     }
 
     public Person create(Person person) {
@@ -63,9 +87,13 @@ public class PersonService implements UserDetailsService {
     }
 
     public Person update(Person person) {
-        Person personSaved = personRepository.findById(person.getId()).orElseThrow(() -> new NoSuchElementException("Objeto não encontrado"));
+        Person personSaved = personRepository.findById(person.getId()).orElseThrow(() -> new NoSuchElementException("Pessoa não encontrada"));
         personSaved.setName(person.getName());
         return personRepository.save(personSaved);
+    }
+
+    public int genValidationCode () {
+        return 100000 + new Random().nextInt(999999);
     }
     
 }

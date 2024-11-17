@@ -2,16 +2,14 @@ package com.leilao.backend.model;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,7 +25,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -45,8 +42,7 @@ public class Person implements UserDetails {
     @NotBlank(message = "{name.required}")
     private String name;
 
-    @Email(message = "{name.invalid}")
-    @UniqueElements (message = "Email já cadastrado")
+    @NotBlank(message = "{email.required}")
     private String email;
 
     //@CPF
@@ -70,7 +66,11 @@ public class Person implements UserDetails {
     private Integer validationCode;
 
     @JsonIgnore
-    private Date validationCodeValidity;
+    private LocalDateTime validationCodeValidity;
+
+    @JsonIgnore
+    private boolean enabled;
+
     @OneToMany(mappedBy = "person", orphanRemoval=true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Setter(value = AccessLevel.NONE)
     private List<PersonProfile> personProfile;
