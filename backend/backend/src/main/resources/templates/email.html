@@ -1,8 +1,90 @@
+<!DOCTYPE html>
 <html>
-        <head><meta charset="utf-8"></head><head></head><body>
-        <h2>Código de Recuperação de Senha</h2>
-       <p>Olá, <span th:text="${name}"></span></p>
-        <p>Seu código de recuperação de senha é: <strong><span th:text="${code}"></span></strong></p>
-    
-</body>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f9f9f9;
+                color: #333;
+            }
+            .container {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+            .header, .footer {
+                width: 100%;
+                max-width: 600px;
+                height: 75px;
+                margin: 0 auto;
+                padding: 10px;
+                background-color: #e0e0e0;
+                text-align: center;
+            }
+            h2 {
+                color: #4CAF50;
+            }
+            .code {
+                font-size: 24px;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .footer-text {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 12px;
+                color: #777;
+            }
+            .social-links {
+                text-align: center;
+                margin-top: 20px;
+            }
+            .social-links a {
+                margin: 0 10px;
+                text-decoration: none;
+                color: #4CAF50;
+            }
+            .powered-by {
+                text-align: center;
+                margin-top: 20px;
+            }
+            .powered-by img {
+                display: block;
+                margin: 0 auto;
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <div class="header"></div>
+        <div class="container">
+            <h2>Código de Recuperação de Senha</h2>
+            <p>Olá, <span th:text="${name}">Nome</span></p>
+            <p>Seu código de recuperação de senha é:</p>
+            <div class="code" th:text="${code}">123456</div>
+            <div class="powered-by">
+                <p>Powered by</p>
+                <img src="cid:sitelogo" alt="Site Logo" width="100">
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="footer-text">
+                <p>Atualize suas preferências de e-mail ou cancele a assinatura <a href="unsubscribe-link">aqui</a></p> 
+                <p>© 2024 Eduardo A. Ribeiro</p>
+                <p>IFPR - Campus Paranavaí</p>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </body>
 </html>
