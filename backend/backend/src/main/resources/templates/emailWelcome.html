@@ -52,6 +52,10 @@
                 text-decoration: none;
                 color: #4CAF50;
             }
+            .social-links img{
+                width: 30px;
+                height: 30px;
+            }
             .powered-by {
                 text-align: center;
                 margin-top: 20px;
@@ -59,9 +63,11 @@
             .powered-by img {
                 display: block;
                 margin: 0 auto;
+                width: 100px;
+                margin-top: 0;
+                margin-bottom: 0;
             }
         </style>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
     <body>
         <div class="header"></div>
@@ -73,12 +79,12 @@
             <div class="code" th:text="${code}">123456</div>
             <div class="powered-by">
                 <p>Powered by</p>
-                <img src="cid:sitelogo" alt="Site Logo" width="100">
+                <a href="siteleilao-link" target="_blank" rel="noopener"><img src="https://i.imgur.com/QCCnP0i.png" alt="Site Logo"></a>
             </div>
             <div class="social-links">
-                <a href="https://www.instagram.com" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.linkedin.com" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener"><img src="https://img.freepik.com/premium-photo/instagram-icon_1249159-1217.jpg?semt=ais_hybrid" alt="Instagram logo"></a>
+                <a href="https://www.youtube.com" target="_blank" rel="noopener"><img src="https://w7.pngwing.com/pngs/457/1007/png-transparent-youtube-computer-icons-youtube-angle-rectangle-black-thumbnail.png" alt="YouTube logo"></a>
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7Qx2NOp5icY_daJnXtf--aKNWZxIEI3CFJw&s" alt="LinkedIn logo"></a>
             </div>
             <div class="footer-text">
                 <p>Atualize suas preferências de e-mail ou cancele a assinatura <a href="unsubscribe-link">aqui</a></p> 
