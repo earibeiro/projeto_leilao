@@ -24,6 +24,10 @@
     margin-bottom: 1rem;
 }
 
+.p-icon-field {
+    width: 100%;
+}
+
 .p-card-subtitle{
     margin: 0 0 15px 0;
 }
