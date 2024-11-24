@@ -21,6 +21,21 @@ class PersonService extends BaseService {
         return response.data;
     }
 
+    async passwordCodeRequest(data){
+        const response = await this.api.post(`${this.endPoint}/passwordCodeRequest`, data);
+        return response.data;
+    }
+
+    async passwordRecovery(data){
+        const response = await this.api.post(`${this.endPoint}/passwordRecovery`, data);
+        return response.data;
+    }
+
+    async validateEmail(data){
+        const response = await this.api.post(`${this.endPoint}/emailValidate`, data);
+        return response.data;
+    }
+
     async delete(id){
         const response = await this.api.delete(`${this.endPoint}/${id}`);
         return response.data;

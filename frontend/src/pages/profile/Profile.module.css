@@ -1,16 +1,49 @@
-.cardProfile {
+.containerProfile {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 20px;
-    margin: 20px;
-    border: 1px solid #dddddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #f9fafb;
 }
 
-.profileImage {
-    width: 150px;
-    height: 150px;
-    margin-top: 10px;
+.gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-width: 40rem;
+}
+
+.flex-grow-1 {
+    width: 100%;
+}
+
+.inputField {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.p-icon-field {
+    width: 100%;
+}
+
+.p-card-subtitle {
+    margin: 0 0 15px 0;
+}
+
+.buttonGroup {
+    margin-top: 1rem;
+}
+
+.textRed {
+    color: #ef4444;
+}
+
+@media screen and (max-width: 920px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
 }

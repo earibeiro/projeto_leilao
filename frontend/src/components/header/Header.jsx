@@ -21,7 +21,7 @@ const Header = () => {
                     label: t('home'),
                     icon: 'pi pi-fw pi-home',
                     command: () => {
-                        window.location.href = '/';
+                        navigate('/');
                     }
                 },
                 {
@@ -40,14 +40,15 @@ const Header = () => {
                     label: t('profile'),
                     icon: 'pi pi-fw pi-user',
                     command: () => {
-                        window.location.href = '/profile';
+                        navigate('/profile');
                     }
                 },
                 {
                     label: t('logout'),
                     icon: 'pi pi-fw pi-power-off',
                     command: () => {
-                        Logout();
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("user");
                         navigate('/login');
                     }
                 }

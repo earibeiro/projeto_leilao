@@ -5,7 +5,7 @@ const PrivateRouter = () => {
 
     const isAuthenticated = localStorage.getItem("token")?true:false;
 
-    return (isAuthenticated?<Outlet/>:<Navigate to="/login"/>);
+    return (isAuthenticated?<Outlet/>:<Navigate to="/unauthorized"/>);
 
 }
 

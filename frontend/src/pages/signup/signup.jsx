@@ -67,7 +67,7 @@ const Signup = () => {
         try {
             await personService.create(person);
             alert(t('signupSuccess'));
-            window.location.href = '/login';
+            window.location.href = '/signupvalidation';
         } catch (error) {
             console.error(error);
             alert(t('signupError'));

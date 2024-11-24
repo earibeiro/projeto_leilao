@@ -31,7 +31,7 @@ const Login = () => {
         } catch (err) {
             console.log(err);
             console.log(user);
-            setError('Invalid email or password');
+            setError(t('invalidCredentials'));
         }
     }
 

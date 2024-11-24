@@ -3,13 +3,20 @@ import { Button } from 'primereact/button';
 import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
+    const navigate = useNavigate();
 
-    const logout = () =>{
+    const logout = () => {
         console.log("Usuário deslogado");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        window.location.href = '/login';
+        navigate("/login");
     }
 
+    return (
+        <div>
+            <Button label="Logout" onClick={logout} />
+        </div>
+    );
 }
+
 export default Logout;

@@ -1,36 +1,29 @@
-import React, { useState } from "react";
-import style from "./ChangePass.module.css";
-import { Password } from 'primereact/password';
-import { Card } from 'primereact/card';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Card } from 'primereact/card';
+import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
+import { FloatLabel } from 'primereact/floatlabel';
+import style from './ChangePass.module.css';
 import { useTranslation } from 'react-i18next';
+import PersonService from '../../services/PersonService';
+import { InputText } from 'primereact/inputtext';
+import { useNavigate } from 'react-router-dom';
 
 const ChangePass = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [confirmPasswordError, setConfirmPasswordError] = useState('');
-    const {t} = useTranslation();
+    const [code, setCode] = useState('');
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+    const personService = new PersonService();
 
     const validatePassword = (password) => {
-        const minLength = /.{6,}/;
-        const upperCase = /[A-Z]/;
-        const lowerCase = /[a-z]/;
-        const number = /[0-9]/;
+        const minLength = 8;
         const specialChar = /[!@#$%^&*(),.?":{}|<>]/;
-
-        if (!minLength.test(password)) {
-            return t('minLength');
-        }
-        if (!upperCase.test(password)) {
-            return t('minUpper');
-        }
-        if (!lowerCase.test(password)) {
-            return t('minLower');
-        }
-        if (!number.test(password)) {
-            return t('minNumber');
+        if (password.length < minLength) {
+            return t('minLength', { minLength });
         }
         if (!specialChar.test(password)) {
             return t('minSpecial');
@@ -41,11 +34,13 @@ const ChangePass = () => {
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
         setPassword(newPassword);
-        setPasswordError(validatePassword(newPassword));
-        if (confirmPassword !== newPassword) {
-            setConfirmPasswordError(t('nomatch'));
+        const validationError = validatePassword(newPassword);
+        if (validationError) {
+            setPasswordError(validationError);
+        } else if (newPassword !== confirmPassword) {
+            setPasswordError(t('nomatch'));
         } else {
-            setConfirmPasswordError("");
+            setPasswordError('');
         }
     };
 
@@ -53,9 +48,34 @@ const ChangePass = () => {
         const newConfirmPassword = e.target.value;
         setConfirmPassword(newConfirmPassword);
         if (newConfirmPassword !== password) {
-            setConfirmPasswordError(t('nomatch'));
+            setPasswordError(t('nomatch'));
         } else {
-            setConfirmPasswordError("");
+            setPasswordError('');
+        }
+    };
+
+    const handleValidationCodeChange = (e) => {
+        setCode(e.target.value);
+    };
+
+    const handleChangePassword = async () => {
+        if (!password || !confirmPassword) {
+            alert(t('allFieldsRequired'));
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setPasswordError(t('nomatch'));
+            return;
+        }
+
+        try {
+            const email = localStorage.getItem('email');
+            await personService.passwordRecovery({ email, password, code });
+            localStorage.removeItem('email');
+            navigate('/login');
+        } catch (error) {
+            alert(t('errorChangingPassword'));
         }
     };
 
@@ -65,19 +85,28 @@ const ChangePass = () => {
                 <title>{t('changePassword')}</title>
             </Helmet>
             <Card title={t('changePassword')} subTitle={t('enterNPassword')} className={style.changeCard}>
-                <div className="flex align-items-center mb-2">
-                    <label htmlFor="password" className="mr-2" style={{ minWidth: '150px' }}>{t('newPassword')}</label>
-                    <Password id="password" className="flex-grow-1" inputStyle={{ width: '100%' }} value={password} feedback={false} onChange={handlePasswordChange} toggleMask required />
+                <div className="flex align-items-center m-2 mb-5">
+                    <FloatLabel htmlFor="validationCode" className="flex-grow-1">
+                        <InputText id="validationCode" name="validationCode" className="flex-grow-1 w-full" onChange={handleValidationCodeChange} required />
+                        <label htmlFor="validationCode">{t('validationCode')}</label>
+                    </FloatLabel>
                 </div>
-                {passwordError && <small className={`${style.textRed} mb-2`}>{passwordError}</small>}
-                <div className="flex align-items-center mb-2">
-                    <label htmlFor="confirmPassword" className="mr-2" style={{ minWidth: '150px' }}>{t('confirmPassword')}</label>
-                    <Password id="confirmPassword" className="flex-grow-1" inputStyle={{ width: '100%' }} value={confirmPassword} feedback={false} onChange={handleConfirmPasswordChange} toggleMask required />
+                <div className="flex align-items-center m-2 mb-5">
+                    <FloatLabel htmlFor="password" className="flex-grow-1">
+                        <Password id="password" name="password" inputStyle={{width:'100%'}} className="w-full" value={password} feedback={false} onChange={handlePasswordChange} toggleMask required />
+                        <label htmlFor="password">{t('newPassword')}</label>
+                    </FloatLabel>
                 </div>
-                {confirmPasswordError && <small className={`${style.textRed} mb-2`}>{confirmPasswordError}</small>}
-                <div className="flex justify-content-between mt-4">
-                    <a href="/login"><Button label={t('button.cancel')} className={style.cancelButton} /></a>
-                    <a href="/login"><Button label={t('button.confirm')} className={style.confirmButton} disabled={passwordError || confirmPasswordError} /></a>
+                <div className="flex align-items-center m-2 mb-5">
+                    <FloatLabel htmlFor="confirmPassword" className="flex-grow-1">
+                        <Password id="confirmPassword" name="confirmPassword" inputStyle={{width:'100%'}} className="w-full" value={confirmPassword} feedback={false} onChange={handleConfirmPasswordChange} toggleMask required />
+                        <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
+                    </FloatLabel>
+                </div>
+                {passwordError && <small className={style.textRed}>{passwordError}</small>}
+                <div className={style.buttonGroup}>
+                    <Button label={t('button.cancel')} className="m-2" onClick={() => window.location.href = '/login'} />
+                    <Button label={t('button.confirm')} className="m-2" onClick={handleChangePassword} disabled={passwordError} />
                 </div>
             </Card>
         </div>
