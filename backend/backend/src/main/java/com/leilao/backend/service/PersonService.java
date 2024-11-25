@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
 import com.leilao.backend.model.Person;
-import com.leilao.backend.model.PersonEmailValidateDTO;
 import com.leilao.backend.model.PersonRecoveryDTO;
 import com.leilao.backend.repository.PersonRepository;
 
@@ -64,9 +63,9 @@ public class PersonService implements UserDetailsService {
         return "Código inválido";
     }
 
-    public String emailValidate(PersonEmailValidateDTO personEmailValidateDTO) {
-        Person person = personRepository.findByEmail(personEmailValidateDTO.getEmail()).orElseThrow(() -> new NoSuchElementException("Pessoa não encontrada"));
-            if(person.getValidationCode() == personEmailValidateDTO.getCode()) {
+    public String emailValidate(int code) {
+        Person person = personRepository.findByValidationCode(code).orElseThrow(() -> new NoSuchElementException("Pessoa não encontrada"));
+            if(person.getValidationCode() == code) {
                 person.setEnabled(true);
                 person.setValidationCode(null);
                 personRepository.save(person);

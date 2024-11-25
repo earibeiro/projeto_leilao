@@ -86,6 +86,7 @@
     "button.home": "Voltar ao início",
     "invalidCredentials": "Email ou senha inválidos",
     "invalidCpf": "CPF inválido",
+    "signupError": "Email já cadastrado!",
     "code": {
         "sent": "Código enviado com sucesso",
         "invalid": "Código inválido",

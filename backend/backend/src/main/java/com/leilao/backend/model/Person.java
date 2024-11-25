@@ -43,6 +43,7 @@ public class Person implements UserDetails {
     private String name;
 
     @NotBlank(message = "{email.required}")
+    @Column(unique = true)
     private String email;
 
     //@CPF

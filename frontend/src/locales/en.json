@@ -84,6 +84,7 @@
     "button.home": "Back to home",
     "invalidCredentials": "Invalid email or password",
     "invalidCpf": "Invalid CPF",
+    "signupError": "Email already registered",
     "button": {
         "login": "Login",
         "save": "Save",

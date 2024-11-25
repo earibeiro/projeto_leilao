@@ -1,11 +1,13 @@
 package com.leilao.backend.controller;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.leilao.backend.model.Person;
 import com.leilao.backend.model.PersonAuthRequestDTO;
 import com.leilao.backend.model.PersonAuthResponseDTO;
-import com.leilao.backend.model.PersonEmailValidateDTO;
 import com.leilao.backend.model.PersonRecoveryDTO;
 import com.leilao.backend.repository.PersonRepository;
 import com.leilao.backend.security.JwtService;
@@ -25,6 +26,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/person")
+@CrossOrigin
 public class PersonController {
     
     @Autowired
@@ -42,8 +44,8 @@ public class PersonController {
     @PostMapping("/login")
     public PersonAuthResponseDTO authenticateUser(@RequestBody PersonAuthRequestDTO authRequest) {
         Optional<Person> person = personRepository.findByEmail(authRequest.getEmail());
-        if (person.get().isEnabled() == false) {
-            return new PersonAuthResponseDTO(authRequest.getEmail(), "Email não validado");
+        if (!person.get().isEnabled()) {
+            throw new RuntimeException("Email not validated");
         }
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
@@ -63,8 +65,9 @@ public class PersonController {
     }
 
     @PostMapping("/emailValidate")
-    public String emailValidate(@RequestBody PersonEmailValidateDTO personEmailValidateDTO) {
-        return personService.emailValidate(personEmailValidateDTO);
+    public String emailValidate(@RequestBody Map<String, String> payload) {
+        String code = payload.get("code");
+        return personService.emailValidate(Integer.parseInt(code));
     }
 
     @PostMapping
