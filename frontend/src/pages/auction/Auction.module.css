@@ -1,0 +1,49 @@
+.containerAuction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 100px); /* Ajuste para considerar o header e o footer */
+    margin: 0;
+    padding: 0;
+    background-color: #f9fafb;
+}
+
+.auctionCard {
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center;
+    background: #ffffff;
+    overflow-y: auto; /* Adiciona rolagem se o conteúdo for maior que o card */
+}
+
+.inputField {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.p-icon-field {
+    width: 100%;
+}
+
+.p-card-subtitle {
+    margin: 0 0 15px 0;
+}
+
+.buttonGroup {
+    margin-top: 1rem;
+}
+
+.textRed {
+    color: #ef4444;
+}
+
+@media screen and (max-width: 920px) {
+  .auctionCard {
+    width: 90%;
+    padding: 2rem;
+  }
+}

@@ -15,6 +15,7 @@ import ValidationSuccess from './pages/validationSuccess/ValidationSuccess';
 import Unauthorized from './pages/unauthorized/Unauthorized';
 import NotFound from './pages/notfound/NotFound';
 import Category from './pages/category/Category';
+import Auction from './pages/auction/Auction';
 
 function App(){
     return(
@@ -26,6 +27,7 @@ function App(){
                     <Route path="/dashboard" element={<DefaultLayout><Dashboard/></DefaultLayout>}/>
                     <Route path="/profile" element={<DefaultLayout><Profile/></DefaultLayout>}/>
                     <Route path="/category" element={<DefaultLayout><Category/></DefaultLayout>}/>
+                    <Route path="/auction" element={<DefaultLayout><Auction/></DefaultLayout>}/>
                 </Route>
                 <Route path="/login" element={<SimpleLayout><Login/></SimpleLayout>}/>
                 <Route path="/signup" element={<SimpleLayout><Signup/></SimpleLayout>}/>
