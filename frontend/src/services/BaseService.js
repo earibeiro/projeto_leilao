@@ -14,7 +14,7 @@ class BaseService{
     }
 
     async update(data){
-        const response = await this.put(this.endPoint, data);
+        const response = await this.api.put(this.endPoint, data);
         return response.data;
     }
 
