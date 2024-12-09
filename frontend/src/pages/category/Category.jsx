@@ -59,10 +59,11 @@ const Category = () => {
             }
             loadCategories();
         } catch (error) {
+            console.log(error);
             toast.current.show({
                 severity: "error",
                 summary: "Erro",
-                detail: "Erro ao salvar categori",
+                detail: "Erro ao salvar categoria",
             });
         } finally {
             hideDialog();
@@ -123,7 +124,7 @@ const Category = () => {
     );
 
     return (
-        <div className="p-grid p-justify-center">
+        <div className="p-grid p-justify-center h-screen">
             <Toast ref={toast} />
             <ConfirmDialog acceptLabel="Sim" rejectLabel="Não"/>
           

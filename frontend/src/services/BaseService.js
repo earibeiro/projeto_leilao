@@ -8,6 +8,7 @@ class BaseService{
     }
 
     async insert(data){
+        console.log(data);
         const response = await this.api.post(this.endPoint, data);
         return response.data;
     }
@@ -24,6 +25,7 @@ class BaseService{
 
     async list(){
         const response = await this.api.get(this.endPoint);
+        console.log(response);
         return response.data;
     }
 
