@@ -1,12 +1,30 @@
-.header{
-    border: 1px solid #aaa9a9;
+.header {
+    border: 1px solid #353535;
     border-radius: 5px;
     padding: 10px;
-    background-color: #dfdfdf;
+    background-color: #2f2f2f;
     display: flex;
 }
 
 .menu {
     display: flex;
     text-align: left;
+}
+
+.menuButton {
+    background-color: #ffd700; /* Cor dourada */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.menuButton:hover {
+    background-color: #e6be00; /* Cor dourada mais escura para hover */
 }

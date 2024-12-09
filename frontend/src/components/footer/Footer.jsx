@@ -28,10 +28,12 @@ const Footer = () => {
                         <ul>{t('faq')}</ul>
                         <ul>{t('contactUs')}</ul>
                     </div>
+                    <div className={style.footerText}>
+                        <p>{t('footerText')}</p>
+                    </div>
                 </div>
             </div>
             
-            <p className={style.footerText}>{t('footerText')}</p>
         </div>
     );
 }

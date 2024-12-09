@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 100px); /* Ajuste para considerar o header e o footer */
     margin: 0;
     padding: 0;
     background-color: #f9fafb;

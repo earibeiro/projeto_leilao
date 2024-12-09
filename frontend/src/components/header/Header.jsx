@@ -3,7 +3,6 @@ import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 import { Toast } from "primereact/toast";
 import style from "./Header.module.css";
-import Logout from "../../components/logout/logout";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -63,7 +62,7 @@ const Header = () => {
             <div className={style.menu}>
                 <Toast ref={toast} />
                 <Menu model={items} popup ref={menuLeft} id="popup_menu" />
-                <Button label="Menu" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+                <Button label="Menu" icon="pi pi-align-left" className={`${style.menuButton} mr-2`} onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
             </div>
         </div>
     );

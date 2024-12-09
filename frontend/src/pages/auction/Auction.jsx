@@ -27,7 +27,6 @@ const Auction = () => {
     const { t } = useTranslation();
 
     useEffect(() => {
-        // Fetch categories
         axios.get('/api/category')
             .then(response => setCategories(response.data))
             .catch(error => console.error('Error fetching categories:', error));
@@ -46,7 +45,6 @@ const Auction = () => {
         axios.post('/api/auction', auction)
             .then(response => {
                 console.log('Auction created:', response.data);
-                // Reset form
                 setAuction({
                     title: '',
                     description: '',
