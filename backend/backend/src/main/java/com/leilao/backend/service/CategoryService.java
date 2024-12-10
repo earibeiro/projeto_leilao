@@ -18,8 +18,6 @@ public class CategoryService {
 
     public Category create(Category category, Person person) {
         category.setPerson(person);
-        System.out.println(category.getName() + " " + category.getObservation());
-        System.out.print(person.getName());
         return categoryRepository.save(category);
     }
 

@@ -94,6 +94,8 @@
     "incrementValue": "Increment Value",
     "minimumBid": "Minimum Bid",
     "category": "Category",
+    "needValidation": "Do you need to validate your email?",
+    "validateNow": "Validate Now",
     "button": {
         "login": "Login",
         "save": "Save",

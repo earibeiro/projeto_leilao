@@ -55,6 +55,7 @@ const Login = () => {
                 </div>
                 <a href="/recoverpass" className={style.recPass}>{t('forgotPassword')}</a>
                 <p>{t('noAccount')}<a href="/signup" className={style.aLogin}>{t('signupNow')}</a></p>
+                <p>{t('needValidation')}<a href="/signupvalidation" className={style.aLogin}>{t('validateNow')}</a></p>
                 <small className={style.textRed}>{error}</small>
                 <br/>
                 <Button label={t('button.login')} onClick={login} className={style.button} />

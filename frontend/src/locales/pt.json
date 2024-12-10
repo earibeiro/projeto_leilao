@@ -96,6 +96,8 @@
     "incrementValue": "Aumentar valor",
     "minimumBid": "Lance Mínimo",
     "category": "Categoria",
+    "needValidation": "Precisa validar seu email?",
+    "validateNow": "Validar Agora",
     "code": {
         "sent": "Código enviado com sucesso",
         "invalid": "Código inválido",

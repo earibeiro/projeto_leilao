@@ -40,8 +40,13 @@
 }
 
 .button{
-  background-color: #4ade80;
-  border: #4ade80;
+  background-color: #cbad02;
+  border: #cbad02;
+}
+
+.button:hover{
+  background-color: #aa9002;
+  border: #aa9002;
 }
 
 .p-icon-field{

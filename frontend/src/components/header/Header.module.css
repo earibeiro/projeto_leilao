@@ -12,7 +12,7 @@
 }
 
 .menuButton {
-    background-color: #ffd700; /* Cor dourada */
+    background-color: #cbad02;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -26,5 +26,5 @@
 }
 
 .menuButton:hover {
-    background-color: #e6be00; /* Cor dourada mais escura para hover */
+    background-color: #c1a104;
 }
