@@ -36,6 +36,7 @@ public class AuctionController {
     @PostMapping
     public Auction create(@RequestBody Auction auction, Principal principal) {
         Person person = personRepository.findByEmail(principal.getName()).orElseThrow(() -> new RuntimeException("Person not found"));
+        auction.setPerson(person);
         return auctionService.create(auction, person);
     }
 

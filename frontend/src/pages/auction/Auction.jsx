@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
-import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
@@ -13,8 +12,8 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { useTranslation } from 'react-i18next';
-import auctionService from '../../services/AuctionService';
-import categoryService from '../../services/Categoryservice';
+import AuctionService from '../../services/AuctionService';
+import CategoryService from '../../services/Categoryservice';
 import style from './Auction.module.css';
 
 const Auction = () => {
@@ -37,6 +36,10 @@ const Auction = () => {
     const { t } = useTranslation();
     const toast = useRef(null);
 
+
+    const auctionService = new AuctionService();
+    const categoryService = new CategoryService();
+
     useEffect(() => {
         loadCategories();
         loadAuctions();
@@ -47,6 +50,20 @@ const Auction = () => {
             const data = await categoryService.list();
             setCategories(data);
         } catch (error) {
+            console.error('Error fetching categories:', error);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                console.error('Response headers:', error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error('Request data:', error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.error('Error message:', error.message);
+            }
             toast.current.show({
                 severity: 'error',
                 summary: t('error.generic'),
@@ -61,6 +78,16 @@ const Auction = () => {
             const data = await auctionService.list();
             setAuctions(data);
         } catch (error) {
+            console.error('Error fetching auctions:', error);
+            if (error.response) {
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                console.error('Response headers:', error.response.headers);
+            } else if (error.request) {
+                console.error('Request data:', error.request);
+            } else {
+                console.error('Error message:', error.message);
+            }
             toast.current.show({
                 severity: 'error',
                 summary: t('error.generic'),
@@ -165,6 +192,15 @@ const Auction = () => {
         </div>
     );
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setAuction({ ...auction, [name]: value });
+    };
+
+    const handleDateChange = (name, value) => {
+        setAuction({ ...auction, [name]: value });
+    };
+
     return (
         <div className="p-grid p-justify-center h-screen">
             <Helmet>
@@ -192,39 +228,39 @@ const Auction = () => {
             >
                 <div className="field">
                     <label htmlFor="title">{t('title')}</label>
-                    <InputText id="title" name="title" value={auction.title} onChange={(e) => setAuction({ ...auction, name: e.target.value })} required />
+                    <InputText id="title" name="title" value={auction.title} onChange={handleChange} required />
                 </div>
                 <div className="field">
                     <label htmlFor="description">{t('description')}</label>
-                    <InputTextarea id="description" name="description" value={auction.description} onChange={(e) => setAuction({ ...auction, description: e.target.value })} rows={3} />
+                    <InputTextarea id="description" name="description" value={auction.description} onChange={handleChange} rows={3} />
                 </div>
                 <div className="field">
                     <label htmlFor="startDateTime">{t('startDateTime')}</label>
-                    <Calendar id="startDateTime" value={auction.startDateTime} onChange={setAuction} showTime />
+                    <Calendar id="startDateTime" value={auction.startDateTime} onChange={(e) => handleDateChange('startDateTime', e.value)} showTime />
                 </div>
                 <div className="field">
                     <label htmlFor="endDateTime">{t('endDateTime')}</label>
-                    <Calendar id="endDateTime" value={auction.endDateTime} onChange={setAuction} showTime />
+                    <Calendar id="endDateTime" value={auction.endDateTime} onChange={(e) => handleDateChange('endDateTime', e.value)} showTime />
                 </div>
                 <div className="field">
                     <label htmlFor="status">{t('status')}</label>
-                    <InputText id="status" name="status" value={auction.status} onChange={(e) => setAuction({ ...auction, status: e.target.value })} required />
+                    <InputText id="status" name="status" value={auction.status} onChange={handleChange} required />
                 </div>
                 <div className="field">
                     <label htmlFor="observation">{t('observation')}</label>
-                    <InputTextarea id="observation" name="observation" value={auction.observation} onChange={(e) => setAuction({ ...auction, observation: e.target.value })} rows={3} />
+                    <InputTextarea id="observation" name="observation" value={auction.observation} onChange={handleChange} rows={3} />
                 </div>
                 <div className="field">
                     <label htmlFor="incrementValue">{t('incrementValue')}</label>
-                    <InputText id="incrementValue" name="incrementValue" value={auction.incrementValue} onChange={(e) => setAuction({ ...auction, incrementValue: e.target.value })} required />
+                    <InputText id="incrementValue" name="incrementValue" value={auction.incrementValue} onChange={handleChange} required />
                 </div>
                 <div className="field">
                     <label htmlFor="minimumBid">{t('minimumBid')}</label>
-                    <InputText id="minimumBid" name="minimumBid" value={auction.minimumBid} onChange={(e) => setAuction({ ...auction, minimumBid: e.target.value })} required />
+                    <InputText id="minimumBid" name="minimumBid" value={auction.minimumBid} onChange={handleChange} required />
                 </div>
                 <div className="field">
                     <label htmlFor="category">{t('category')}</label>
-                    <Dropdown id="category" value={auction.category} options={categories} onChange />
+                    <Dropdown id="category" value={auction.category} options={categories} onChange={(e) => handleChange({ target: { name: 'category', value: e.value } })} optionLabel="name" placeholder={t('selectCategory')} />
                 </div>
             </Dialog>
         </div>
