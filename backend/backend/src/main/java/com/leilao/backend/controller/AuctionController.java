@@ -29,7 +29,6 @@ public class AuctionController {
     @Autowired
     private AuctionService auctionService;
 
-
     @Autowired
     private PersonRepository personRepository;
 
@@ -60,5 +59,7 @@ public class AuctionController {
         System.out.println(name + " " + age);
         return name + " " + age; 
     }
+
+    
 
 }

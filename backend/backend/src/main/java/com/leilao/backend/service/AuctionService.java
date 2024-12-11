@@ -1,5 +1,6 @@
 package com.leilao.backend.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leilao.backend.model.Auction;
+import com.leilao.backend.model.Image;
 import com.leilao.backend.model.Person;
 import com.leilao.backend.repository.AuctionRepository;
 
@@ -43,4 +45,17 @@ public class AuctionService {
     public List<Auction> listAll() {
         return auctionRepository.findAll();
     }
+
+    //adicionar imagem no service
+    public Auction addImagem(Long auctionId, LocalDateTime registrationDateTime, String imageName){
+        Auction auction = auctionRepository.findById(auctionId).orElseThrow(() -> new NoSuchElementException("Auction not found"));
+        Image image = new Image();
+        image.setAuctionId(auction);
+        image.setRegistrationDateTime(registrationDateTime);
+        image.setImageName(imageName);
+        auction.setImage(image);
+        return null;
+    }
+
+
 }
