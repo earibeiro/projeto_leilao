@@ -1,9 +1,11 @@
 import React from "react";
 import style from "./Footer.module.css";
 import { useTranslation} from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
     const {t} = useTranslation();
+    const navigate = useNavigate();
 
     return(
         <div className="footer">
@@ -11,8 +13,7 @@ const Footer = () => {
                 <div class={style.sections}>
                     <div class={style.textLeft}>
                     <ul className={style.fontBold}>{t('auctions')}</ul>
-                        <ul>{t('howItWorks')}</ul>
-                        <ul>{t('ongoingAuctions')}</ul>
+                        <ul onClick={() => navigate('/auction')} style={{ cursor: 'pointer' }}>{t('ongoingAuctions')}</ul>
                         <ul>{t('closedAuctions')}</ul>
                         <ul>{t('scheduledAuctions')}</ul>
                     </div>

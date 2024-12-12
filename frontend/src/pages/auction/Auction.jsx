@@ -17,6 +17,9 @@ import CategoryService from '../../services/Categoryservice';
 import style from './Auction.module.css';
 
 const Auction = () => {
+    const auctionService = new AuctionService();
+    const categoryService = new CategoryService();
+    
     const [auctions, setAuctions] = useState([]);
     const [auction, setAuction] = useState({
         title: '',
@@ -27,7 +30,8 @@ const Auction = () => {
         observation: '',
         incrementValue: '',
         minimumBid: '',
-        category: null
+        category: null,
+        images: []
     });
     const [categories, setCategories] = useState([]);
     const [dialogVisible, setDialogVisible] = useState(false);
@@ -35,10 +39,6 @@ const Auction = () => {
     const [loading, setLoading] = useState(true);
     const { t } = useTranslation();
     const toast = useRef(null);
-
-
-    const auctionService = new AuctionService();
-    const categoryService = new CategoryService();
 
     useEffect(() => {
         loadCategories();
@@ -52,16 +52,12 @@ const Auction = () => {
         } catch (error) {
             console.error('Error fetching categories:', error);
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 console.error('Response data:', error.response.data);
                 console.error('Response status:', error.response.status);
                 console.error('Response headers:', error.response.headers);
             } else if (error.request) {
-                // The request was made but no response was received
                 console.error('Request data:', error.request);
             } else {
-                // Something happened in setting up the request that triggered an Error
                 console.error('Error message:', error.message);
             }
             toast.current.show({
@@ -108,7 +104,8 @@ const Auction = () => {
             observation: '',
             incrementValue: '',
             minimumBid: '',
-            category: null
+            category: null,
+            images: []
         });
         setDialogVisible(true);
         setIsEdit(false);
@@ -201,6 +198,15 @@ const Auction = () => {
         setAuction({ ...auction, [name]: value });
     };
 
+    const handleImageChange = (e) => {
+        const files = Array.from(e.target.files);
+        const images = files.map(file => ({
+            registrationDateTime: new Date(),
+            imageName: file.name,
+        }));
+        setAuction({ ...auction, images });
+    };
+
     return (
         <div className="p-grid p-justify-center h-screen">
             <Helmet>
@@ -262,6 +268,22 @@ const Auction = () => {
                     <label htmlFor="category">{t('category')}</label>
                     <Dropdown id="category" value={auction.category} options={categories} onChange={(e) => handleChange({ target: { name: 'category', value: e.value } })} optionLabel="name" placeholder={t('selectCategory')} />
                 </div>
+                <div className="field">
+                    <label htmlFor="images">{t('images')}</label>
+                    <input type="file" id="images" name="images" multiple onChange={handleImageChange} />
+                </div>
+                {auction.images && auction.images.length > 0 && (
+                    <div className="field">
+                        <label>{t('uploadedImages')}</label>
+                        <div className="p-grid">
+                            {auction.images.map((image, index) => (
+                                <div key={index} className="p-col-4">
+                                    <img src={`/path/to/images/${image.imageName}`} alt={image.imageName} style={{ width: '100%' }}/>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </Dialog>
         </div>
     );

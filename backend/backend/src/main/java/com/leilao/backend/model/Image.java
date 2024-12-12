@@ -24,7 +24,7 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name = "auction_id")
-    private Auction auctionId;
+    private Auction auction;
 
     @Column(name = "registrationDateTime")
     private LocalDateTime registrationDateTime;

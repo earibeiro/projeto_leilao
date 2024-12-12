@@ -49,11 +49,11 @@ public class AuctionService {
     public Auction addImagem(Long auctionId, LocalDateTime registrationDateTime, String imageName){
         Auction auction = auctionRepository.findById(auctionId).orElseThrow(() -> new NoSuchElementException("Auction not found"));
         Image image = new Image();
-        image.setAuctionId(auction);
+        image.setAuction(auction);
         image.setRegistrationDateTime(registrationDateTime);
         image.setImageName(imageName);
-        auction.setImage(image);
-        return null;
+        auction.getImages().add(image);
+        return auctionRepository.save(auction);
     }
 
 

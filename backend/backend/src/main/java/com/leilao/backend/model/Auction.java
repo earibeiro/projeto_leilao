@@ -1,9 +1,11 @@
 package com.leilao.backend.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -56,8 +58,7 @@ public class Auction {
     @JoinColumn(name = "person_id")
     private Person person;
 
-    @OneToMany
-    @JoinColumn(name = "imageName")
+    @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Image image;
+    private List<Image> images;
 }

@@ -24,16 +24,18 @@ const Header = () => {
                     }
                 },
                 {
-                    label: t('ongoingAuctions'),
-                    icon: 'pi pi-fw pi-list'
+                    label: t('auction'),
+                    icon: 'pi pi-fw pi-list',
+                    command: () => {
+                        navigate('/auction');
+                    }
                 },
                 {
-                    label: t('auctionsMyBids'),
-                    icon: 'pi pi-money-bill'
-                },
-                {
-                    label: t('auctionsMyAuctions'),
-                    icon: 'pi pi-fw pi-list'
+                    label: t('category'),
+                    icon: 'pi pi-money-bill',
+                    command: () => {
+                        navigate('/category');
+                    }
                 },
                 {
                     label: t('profile'),
