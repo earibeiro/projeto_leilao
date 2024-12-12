@@ -1,9 +1,11 @@
 package com.leilao.backend.controller;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leilao.backend.model.Auction;
@@ -60,6 +63,10 @@ public class AuctionController {
         return name + " " + age; 
     }
 
-    
+    @PostMapping("/{auctionId}/images")
+    public ResponseEntity<Auction> addImageToAuction(@PathVariable Long auctionId, @RequestParam LocalDateTime registrationDateTime, @RequestParam String imageName) {
+        Auction updatedAuction = auctionService.addImagem(auctionId, registrationDateTime, imageName);
+        return ResponseEntity.ok(updatedAuction);
+    }
 
 }

@@ -46,7 +46,6 @@ public class AuctionService {
         return auctionRepository.findAll();
     }
 
-    //adicionar imagem no service
     public Auction addImagem(Long auctionId, LocalDateTime registrationDateTime, String imageName){
         Auction auction = auctionRepository.findById(auctionId).orElseThrow(() -> new NoSuchElementException("Auction not found"));
         Image image = new Image();
